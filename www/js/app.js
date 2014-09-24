@@ -24,49 +24,60 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   $stateProvider
 
     .state('app', {
-      url: "/app",
+      url: '/app',
       abstract: true,
-      templateUrl: "templates/menu.html",
+      templateUrl: 'templates/menu.html',
       controller: 'AppCtrl'
     })
 
-    .state('app.search', {
-      url: "/search",
+    .state('app.buys', {
+      url: '/buys',
       views: {
         'menuContent' :{
-          templateUrl: "templates/search.html"
+          templateUrl: 'templates/buys.html',
+          controller: 'BuysCtrl'
         }
       }
     })
 
-    .state('app.browse', {
-      url: "/browse",
+    .state('app.today', {
+      url: '/today',
       views: {
         'menuContent' :{
-          templateUrl: "templates/browse.html"
+          templateUrl: 'templates/today.html',
+          controller: 'TodaysBuysCtrl'
         }
       }
     })
     .state('app.playlists', {
-      url: "/playlists",
+      url: '/playlists',
       views: {
         'menuContent' :{
-          templateUrl: "templates/playlists.html",
+          templateUrl: 'templates/playlists.html',
           controller: 'PlaylistsCtrl'
         }
       }
     })
 
-    .state('app.single', {
-      url: "/playlists/:playlistId",
+    .state('app.trade', {
+      url: '/trades/:tradeId',
       views: {
         'menuContent' :{
-          templateUrl: "templates/playlist.html",
+          templateUrl: 'templates/trade.html',
+          controller: 'TradeCtrl'
+        }
+      }
+    })
+
+    .state('app.single', {
+      url: '/playlists/:playlistId',
+      views: {
+        'menuContent' :{
+          templateUrl: 'templates/playlist.html',
           controller: 'PlaylistCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/buys');
 });
-

@@ -2,11 +2,11 @@
 <widget id="com.ionicframework.insiderios836156" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>insider_ios</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
-    </author>
+    Insider Trading Alerts
+  </description>
+  <author email="cjavilla@gmail.com" href="http://insiderai.com">
+    CJ Avilla
+  </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>

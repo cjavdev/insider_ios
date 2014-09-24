@@ -43,6 +43,24 @@ angular.module('starter.controllers', [])
     { title: 'Cowbell', id: 6 }
   ];
 })
+.controller('TodaysBuysCtrl', function($scope) {
+  $scope.trades = [
+    { ticker: 'AAPL', id: 4 },
+    { ticker: 'GOOG', id: 5 },
+    { ticker: 'IBM', id: 6 }
+  ];
+})
+.controller('BuysCtrl', function($scope) {
+  $scope.trades = [
+    { ticker: 'AAPL', id: 1 },
+    { ticker: 'GOOG', id: 2 },
+    { ticker: 'FB', id: 3 },
+    { ticker: 'BABA', id: 4 },
+    { ticker: 'GE', id: 5 },
+    { ticker: 'WM', id: 6 }
+  ];
+})
+.controller('TradeCtrl', function($scope, $stateParams) {})
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
