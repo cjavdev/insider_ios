@@ -32,7 +32,6 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
-
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
@@ -44,20 +43,16 @@ angular.module('starter.controllers', [])
   ];
 })
 .controller('TodaysBuysCtrl', function($scope) {
-  $scope.trades = [
-    { ticker: 'AAPL', id: 4 },
-    { ticker: 'GOOG', id: 5 },
-    { ticker: 'IBM', id: 6 }
-  ];
+  $scope.trades = $http({ url: "http://localhost:3000/api/v1/buys" })
 })
 .controller('BuysCtrl', function($scope) {
   $scope.trades = [
-    { ticker: 'AAPL', id: 1 },
-    { ticker: 'GOOG', id: 2 },
-    { ticker: 'FB', id: 3 },
-    { ticker: 'BABA', id: 4 },
-    { ticker: 'GE', id: 5 },
-    { ticker: 'WM', id: 6 }
+    { ticker: 'AAPL', id: 1, market_cap: '500B', holdings_change: '40%' },
+    { ticker: 'GOOG', id: 2, market_cap: '400B', holdings_change: '30%' },
+    { ticker: 'FB', id: 3, market_cap: '27B', holdings_change: '35%' },
+    { ticker: 'BABA', id: 4, market_cap: '1M', holdings_change: '10%' },
+    { ticker: 'GE', id: 5, market_cap: '900M', holdings_change: '10%' },
+    { ticker: 'WM', id: 6, market_cap: '500M', holdings_change: '10%' }
   ];
 })
 .controller('TradeCtrl', function($scope, $stateParams) {})

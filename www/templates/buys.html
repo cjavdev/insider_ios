@@ -6,6 +6,8 @@
     <ion-list>
       <ion-item ng-repeat="trade in trades" href="#/app/trades/{{trade.id}}">
         {{trade.ticker}}
+        {{trade.market_cap}}
+        {{trade.holdings_change}}
       </ion-item>
     </ion-list>
   </ion-content>
