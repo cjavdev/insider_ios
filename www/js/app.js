@@ -19,7 +19,8 @@ app.run(function ($ionicPlatform) {
     }
   });
 });
-
+//app.config.apiBase = 'http://localhost:3000';
+app.config.apiBase = 'https://insiderai.com';
 app.service('ideasService', function ($http, $q) {
   function handleError(response) {
     if (!angular.isObject(response.data) || !response.data.message) {
@@ -35,7 +36,7 @@ app.service('ideasService', function ($http, $q) {
   function getIdeas() {
     var request = $http({
       method: 'GET',
-      url: 'http://localhost:3000/api/v1/buys.json',
+      url: app.config.apiBase + '/api/v1/buys.json',
       params: {
         action: 'GET'
       }

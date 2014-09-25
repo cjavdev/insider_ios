@@ -26,7 +26,7 @@ angular.module('insider.controllers', [])
     var params = { user: $scope.loginData };
     params.device = { platform: 'ios', token: '1234' }; // TODO: get the device token
 
-    $http.post('http://localhost:3000/api/v1/users/sign_in.json', params).
+    $http.post(app.config.apiBase + '/api/v1/users/sign_in.json', params).
       success(function (data) {
         $http.defaults.headers.common['Auth-Token-X'] = data.auth_token;
         $scope.closeLogin();
