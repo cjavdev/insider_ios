@@ -4,9 +4,35 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ion-list>
-      <ion-item ng-repeat="trade in trades" href="#/trades/{{trade.id}}">
-        {{trade.ticker}}
-      </ion-item>
+      <div class="card" ng-repeat="trade in trades" href="#/trades/{{trade.id}}">
+        <div class="item icon-left">
+          <i class="ion-arrow-up-a balanced"></i>
+          <strong>{{trade.ticker}}</strong>
+          <span class="subdued">
+            {{trade.market_cap_str}}
+          </span>
+          <span class="item-note">
+            %{{trade.holdings_change}}
+          </span>
+        </div>
+        <div class="item item-image">
+          <img class="full-image" src="http://chart.finance.yahoo.com/z?s={{trade.ticker}}&t=6m&q=l&l=on&z=s&p=v">
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item" href="#">
+            <i class="icon ion-thumbsup"></i>
+            Like
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-chatbox"></i>
+            Comment
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-share"></i>
+            Share
+          </a>
+        </div>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>
