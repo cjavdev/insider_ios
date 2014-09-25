@@ -1,7 +1,7 @@
 {
-  "name": "insider_ios",
+  "name": "InsiderAI",
   "version": "1.0.0",
-  "description": "insider_ios: An Ionic project",
+  "description": "Insider AI: Insider Trading Tracker",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
