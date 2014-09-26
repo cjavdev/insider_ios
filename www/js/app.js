@@ -5,7 +5,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('insider', ['ionic', 'insider.controllers']);
+var app = angular.module('insider', ['ionic', 'insider.controllers', 'ngCordova']);
 app.run(function ($ionicPlatform) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -34,6 +34,7 @@ app.service('ideasService', function ($http, $q) {
   }
 
   function getIdeas() {
+
     var request = $http({
       method: 'GET',
       url: app.config.apiBase + '/api/v1/buys.json',

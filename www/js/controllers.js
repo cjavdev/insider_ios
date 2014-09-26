@@ -1,6 +1,6 @@
-/*globals angular */
+/*globals angular, window */
 angular.module('insider.controllers', [])
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $cordovaPush) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -28,19 +28,59 @@ angular.module('insider.controllers', [])
 
     $http.post(app.config.apiBase + '/api/v1/users/sign_in.json', params).
       success(function (data) {
+        window.localStorage['auth_token'] = data.auth_token;
         $http.defaults.headers.common['Auth-Token-X'] = data.auth_token;
         $scope.closeLogin();
       }).
       error(function (data) {
-        console.log(data);
+        alert(data);
       });
   };
+
+  // var iosConfig = {
+  //   "badge":"true",
+  //   "sound":"true",
+  //   "alert":"true",
+  //   "ecb":"onNotificationAPN"
+  // };
+  //
+  // $cordovaPush.register(iosConfig).then(function(result) {
+  //   alert("successful config!");
+  //   alert(result);
+  //   alert(arguments);
+  // }, function(err) {
+  //   alert("error");
+  //   alert(err);
+  //   // An error occured. Show a message to the user
+  // });
+
+  // $cordovaPush.unregister(options).then(function(result) {
+  //   alert("unregister");
+  //   alert(result);
+  //   alert(arguments);
+  //     // Success!
+  // }, function(err) {
+  //   alert("error");
+  //   alert(err);
+  //     // An error occured. Show a message to the user
+  // });
+  //
+  // // iOS only
+  // $cordovaPush.setBadgeNumber(2).then(function(result) {
+  //   alert("set badge to 2!");
+  //   alert(result);
+  //   alert(arguments);
+  //     // Success!
+  // }, function(err) {
+  //   alert("error");
+  //   alert(err);
+  //     // An error occured. Show a message to the user
+  // });
 })
 .controller('TodaysBuysCtrl', function($scope, $http, ideasService) {
   $scope.trades = [];
   function loadRemoteData() {
     ideasService.getIdeas().then(function (trades) {
-      console.log(trades);
       $scope.trades = trades;
     });
   }
