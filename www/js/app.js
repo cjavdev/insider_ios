@@ -6,7 +6,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('insider', ['ionic', 'insider.controllers', 'ngCordova']);
-app.run(function ($ionicPlatform) {
+app.run(function ($ionicPlatform, $cordovaPush, $rootScope) {
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -17,6 +17,19 @@ app.run(function ($ionicPlatform) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    var iosConfig = {
+      "badge":"true",
+      "sound":"true",
+      "alert":"true",
+      "ecb":"onNotificationAPN"
+    };
+
+    $cordovaPush.register(iosConfig).then(function(result) {
+      $rootScope.deviceToken = result;
+    }, function(err) {
+      console.log("not able to send push");
+    });
   });
 });
 //app.config.apiBase = 'http://localhost:3000';

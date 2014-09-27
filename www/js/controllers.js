@@ -1,6 +1,6 @@
 /*globals angular, window */
 angular.module('insider.controllers', [])
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $cordovaPush) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $rootScope) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -24,7 +24,7 @@ angular.module('insider.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function () {
     var params = { user: $scope.loginData };
-    params.device = { platform: 'ios', token: '1234' }; // TODO: get the device token
+    params.device = { platform: 'ios', token: $rootScope.deviceToken }; // TODO: get the device token
 
     $http.post(app.config.apiBase + '/api/v1/users/sign_in.json', params).
       success(function (data) {
@@ -36,23 +36,6 @@ angular.module('insider.controllers', [])
         alert(data);
       });
   };
-
-  // var iosConfig = {
-  //   "badge":"true",
-  //   "sound":"true",
-  //   "alert":"true",
-  //   "ecb":"onNotificationAPN"
-  // };
-  //
-  // $cordovaPush.register(iosConfig).then(function(result) {
-  //   alert("successful config!");
-  //   alert(result);
-  //   alert(arguments);
-  // }, function(err) {
-  //   alert("error");
-  //   alert(err);
-  //   // An error occured. Show a message to the user
-  // });
 
   // $cordovaPush.unregister(options).then(function(result) {
   //   alert("unregister");
@@ -77,13 +60,16 @@ angular.module('insider.controllers', [])
   //     // An error occured. Show a message to the user
   // });
 })
-.controller('TodaysBuysCtrl', function($scope, $http, ideasService) {
+.controller('TodaysBuysCtrl', function($state, $scope, $http, ideasService) {
   $scope.trades = [];
   function loadRemoteData() {
     ideasService.getIdeas().then(function (trades) {
       $scope.trades = trades;
     });
   }
+  $scope.showTrade = function (id) {
+    $state.go('app.trade', { tradeId: id });
+  };
   loadRemoteData();
 })
 .controller('BuysCtrl', function($scope) {

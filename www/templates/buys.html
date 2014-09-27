@@ -1,10 +1,10 @@
-<ion-view title="Current Buys">
+<ion-view title="Current Ideas">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ion-list>
-      <div class="card" ng-repeat="trade in trades" href="#/trades/{{trade.id}}">
+      <div class="card" ng-repeat="trade in trades" href="#trades/{{trade.id}}">
         <div class="item icon-left">
           <i class="ion-arrow-up-a balanced"></i>
           <strong>{{trade.ticker}}</strong>
