@@ -6,8 +6,8 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('insider', ['ionic', 'insider.controllers', 'insider.services', 'ngCordova']);
-app.config.apiBase = 'http://localhost:3000';
-//app.config.apiBase = 'https://insiderai.com';
+//app.config.apiBase = 'http://localhost:3000';
+app.config.apiBase = 'https://insiderai.com';
 app.run(function ($http, $ionicPlatform, $cordovaPush, $rootScope) {
   var token = window.localStorage.getItem('auth_token');
   if (token !== null) {
