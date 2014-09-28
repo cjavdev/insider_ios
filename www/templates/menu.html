@@ -13,7 +13,10 @@
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
+        <ion-item ng-if="loggedIn()" nav-clear menu-close ng-click="logout()">
+          <i class="icon-left ion-log-in"></i> Logout
+        </ion-item>
+        <ion-item ng-if="!loggedIn()" nav-clear menu-close ng-click="login()">
           <i class="icon-left ion-log-in"></i> Login
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/today">

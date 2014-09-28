@@ -5,8 +5,15 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('insider', ['ionic', 'insider.controllers', 'ngCordova']);
-app.run(function ($ionicPlatform, $cordovaPush, $rootScope) {
+var app = angular.module('insider', ['ionic', 'insider.controllers', 'insider.services', 'ngCordova']);
+app.config.apiBase = 'http://localhost:3000';
+//app.config.apiBase = 'https://insiderai.com';
+app.run(function ($http, $ionicPlatform, $cordovaPush, $rootScope) {
+  var token = window.localStorage.getItem('auth_token');
+  if (token !== null) {
+    $http.defaults.headers.common['Auth-Token-X'] = token;
+  }
+
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,7 +22,7 @@ app.run(function ($ionicPlatform, $cordovaPush, $rootScope) {
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      window.StatusBar.styleDefault();
     }
 
     var iosConfig = {
@@ -28,40 +35,34 @@ app.run(function ($ionicPlatform, $cordovaPush, $rootScope) {
     $cordovaPush.register(iosConfig).then(function(result) {
       $rootScope.deviceToken = result;
     }, function(err) {
-      console.log("not able to send push");
+      console.log("not able to send push", err);
     });
+  // $cordovaPush.unregister(options).then(function(result) {
+  //   alert("unregister");
+  //   alert(result);
+  //   alert(arguments);
+  //     // Success!
+  // }, function(err) {
+  //   alert("error");
+  //   alert(err);
+  //     // An error occured. Show a message to the user
+  // });
+  //
+  // // iOS only
+  // $cordovaPush.setBadgeNumber(2).then(function(result) {
+  //   alert("set badge to 2!");
+  //   alert(result);
+  //   alert(arguments);
+  //     // Success!
+  // }, function(err) {
+  //   alert("error");
+  //   alert(err);
+  //     // An error occured. Show a message to the user
+  // });
+
   });
 });
-//app.config.apiBase = 'http://localhost:3000';
-app.config.apiBase = 'https://insiderai.com';
-app.service('ideasService', function ($http, $q) {
-  function handleError(response) {
-    if (!angular.isObject(response.data) || !response.data.message) {
-      return $q.reject("An unknown error occurred.");
-    }
-    return $q.reject(response.data.message);
-  }
 
-  function handleSuccess(response) {
-    return response.data;
-  }
-
-  function getIdeas() {
-
-    var request = $http({
-      method: 'GET',
-      url: app.config.apiBase + '/api/v1/buys.json',
-      params: {
-        action: 'GET'
-      }
-    });
-    return request.then(handleSuccess, handleError);
-  }
-
-  return {
-    getIdeas: getIdeas
-  };
-});
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('app', {
