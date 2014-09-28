@@ -22,7 +22,7 @@ app.run(function ($http, $ionicPlatform, $cordovaPush, $rootScope) {
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      window.StatusBar.styleDefault();
+      window.StatusBar.styleLightContent();
     }
 
     var iosConfig = {
