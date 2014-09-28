@@ -67,12 +67,16 @@ angular.module('insider.controllers', [])
       window.localStorage.removeItem('auth_token');
     };
   })
-  .controller('TodaysBuysCtrl', function ($state, $scope, BuyIdeaService) {
+  .controller('TodaysBuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
     $scope.trades = [];
+    $ionicLoading.show({
+      template: "<i class='ion-loading-d'></i>"
+    });
 
     function loadRemote() {
       BuyIdeaService.findTodays().then(function (trades) {
         $scope.trades = trades;
+        $ionicLoading.hide();
       });
     }
     loadRemote();
@@ -87,10 +91,15 @@ angular.module('insider.controllers', [])
       loadRemote();
     });
   })
-  .controller('BuysCtrl', function ($state, $scope, BuyIdeaService) {
+  .controller('BuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
+    $ionicLoading.show({
+      template: "<i class='ion-loading-d'></i>"
+    });
+
     function loadRemote() {
       BuyIdeaService.findAll().then(function (trades) {
         $scope.trades = trades;
+        $ionicLoading.hide();
       });
     }
     loadRemote();
