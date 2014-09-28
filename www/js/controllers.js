@@ -69,17 +69,19 @@ angular.module('insider.controllers', [])
   })
   .controller('TodaysBuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
     $scope.trades = [];
-    $ionicLoading.show({
-      template: "<i class='ion-loading-d'></i>"
-    });
+    $scope.refresh = function () {
+      $scope.loading = true;
+      $ionicLoading.show({
+        template: "<i class='ion-loading-d'></i>"
+      });
 
-    function loadRemote() {
       BuyIdeaService.findTodays().then(function (trades) {
         $scope.trades = trades;
+        $scope.loading = false;
         $ionicLoading.hide();
       });
-    }
-    loadRemote();
+    };
+    $scope.refresh();
 
     $scope.showTrade = function (id) {
       $state.go('app.trade', {
@@ -88,21 +90,22 @@ angular.module('insider.controllers', [])
     };
 
     $scope.$on('authchange', function () {
-      loadRemote();
+      $scope.refresh();
     });
   })
   .controller('BuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
-    $ionicLoading.show({
-      template: "<i class='ion-loading-d'></i>"
-    });
-
-    function loadRemote() {
+    $scope.refresh = function () {
+      $scope.loading = true;
+      $ionicLoading.show({
+        template: "<i class='ion-loading-d'></i>"
+      });
       BuyIdeaService.findAll().then(function (trades) {
         $scope.trades = trades;
+        $scope.loading = false;
         $ionicLoading.hide();
       });
-    }
-    loadRemote();
+    };
+    $scope.refresh();
 
     $scope.showTrade = function (id) {
       $state.go('app.trade', {
@@ -111,7 +114,7 @@ angular.module('insider.controllers', [])
     };
 
     $scope.$on('authchange', function () {
-      loadRemote();
+      $scope.refresh();
     });
   })
   .controller('TradeCtrl', function ($scope, $stateParams, BuyIdeaService) {

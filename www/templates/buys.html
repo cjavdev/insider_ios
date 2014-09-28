@@ -4,6 +4,25 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
     <ion-list>
+    <div ng-show="!trades.length && !loading">
+      <div class="row push-down-30">
+        <div class="pull-center" style="text-align: center">
+          <i class="quiet icon-huge ion-sad"></i>
+          <h4 class="quiet">No interesting trades currently.</h4>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="pull-center">
+          <button class="button button-outline button-royal" ng-click="refresh()">
+            Refresh
+          </button>
+          <button ng-show="!loggedIn()" class="button button-royal" ng-click="login()">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
     <div class="card" ng-repeat="trade in trades" ng-click="showTrade({{trade.id}})" href="#/app/trades/{{trade.id}}">
         <div class="item icon-left">
           <i class="icon-big ion-arrow-up-a balanced"></i>
