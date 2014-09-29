@@ -69,6 +69,7 @@ angular.module('insider.controllers', [])
   })
   .controller('TodaysBuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
     $scope.trades = [];
+    var fetchAttempts = 0;
     $scope.refresh = function () {
       $scope.loading = true;
       $ionicLoading.show({
@@ -79,6 +80,17 @@ angular.module('insider.controllers', [])
         $scope.trades = trades;
         $scope.loading = false;
         $ionicLoading.hide();
+      }, function (data) {
+        if(fetchAttempts < 3) {
+          console.log('trying again in 2 seconds');
+          setTimeout(function () {
+            $scope.refresh();
+          }, 2000);
+          fetchAttempts++;
+        } else {
+          $scope.trades = [];
+          $ionicLoading.hide();
+        }
       });
     };
     $scope.refresh();
@@ -94,6 +106,8 @@ angular.module('insider.controllers', [])
     });
   })
   .controller('BuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
+    var fetchAttempts = 0;
+
     $scope.refresh = function () {
       $scope.loading = true;
       $ionicLoading.show({
@@ -103,6 +117,17 @@ angular.module('insider.controllers', [])
         $scope.trades = trades;
         $scope.loading = false;
         $ionicLoading.hide();
+      }, function (data) {
+        if(fetchAttempts < 3) {
+          console.log('trying again in 2 seconds');
+          setTimeout(function () {
+            $scope.refresh();
+          }, 2000);
+          fetchAttempts++;
+        } else {
+          $scope.trades = [];
+          $ionicLoading.hide();
+        }
       });
     };
     $scope.refresh();

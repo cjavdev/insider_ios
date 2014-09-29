@@ -20,6 +20,8 @@ angular.module('insider.services', [])
         var deferred = $q.defer();
         $http.get(url()).then(function (resp) {
           deferred.resolve(resp.data);
+        }, function (resp) {
+          deferred.reject(resp.data);
         });
         return deferred.promise;
       },
@@ -28,6 +30,8 @@ angular.module('insider.services', [])
         var deferred = $q.defer();
         $http.get(url(id)).then(function (resp) {
           deferred.resolve(resp.data);
+        }, function (resp) {
+          deferred.reject(resp.data);
         });
         return deferred.promise;
       },
