@@ -144,6 +144,9 @@ angular.module('insider.controllers', [])
   })
   .controller('TradeCtrl', function ($scope, $stateParams, BuyIdeaService) {
     $scope.direction = "bought";
+    $scope.navigateTo = function (url) {
+      var ref = window.open(url, '_blank', 'location=yes');
+    };
     BuyIdeaService.findById($stateParams.tradeId).then(function (trade) {
       $scope.trade = trade;
     });
