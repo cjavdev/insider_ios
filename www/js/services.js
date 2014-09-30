@@ -2,12 +2,31 @@
 
 var app = angular.module('insider');
 angular.module('insider.services', [])
-  .factory('BuyIdeaService', function($q, $http) {
-    var ideas = [
-      { id: 1, ticker: 'AAPL', market_cap: '500B', holdings_change: 43 },
-      { id: 2, ticker: 'GOOG', market_cap: '600B', holdings_change: 43 }
-    ];
+  .factory('CommentService', function($q, $http) {
+    function url(id) {
+      if(id) {
+        return app.config.apiBase + '/api/v1/comments/' + id + '.json';
+      }
+      return app.config.apiBase + '/api/v1/comments.json';
+    }
 
+    return {
+      addComment: function (params) {
+        var deferred = $q.defer();
+        $http.post(url(), params).then(function (resp) {
+          deferred.resolve(resp.data);
+        }, function (data) {
+          deferred.reject(data);
+        });
+        return deferred.promise;
+      },
+
+      removeComment: function (id) {
+        return $http.delete(url(id));
+      }
+    };
+  })
+  .factory('BuyIdeaService', function($q, $http) {
     function url(id) {
       if(id) {
         return app.config.apiBase + '/api/v1/buys/' + id + '.json';
@@ -42,12 +61,6 @@ angular.module('insider.services', [])
           deferred.resolve(resp.data);
         });
         return deferred.promise;
-      },
-
-      findCurrent: function () {
-        var deferred = $q.defer();
-        deferred.resolve(ideas);
-        return deferred.promise;
-      },
+      }
     };
   });
