@@ -53,7 +53,8 @@ angular.module('insider.controllers', [])
         $scope.closeLogin();
       }).
       error(function (data) {
-        window.alert(data.message);
+        console.log(data);
+        window.alert(data);
       });
     };
     // Perform the login action when the user submits the login form
@@ -69,7 +70,7 @@ angular.module('insider.controllers', [])
   })
   .controller('TodaysBuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
     $scope.trades = [];
-    var fetchAttempts = 0;
+    $scope.fetchAttempts = 0;
     $scope.refresh = function () {
       $scope.loading = true;
       $ionicLoading.show({
@@ -80,14 +81,15 @@ angular.module('insider.controllers', [])
         $scope.trades = trades;
         $scope.loading = false;
         $ionicLoading.hide();
-      }, function (data) {
-        if(fetchAttempts < 3) {
-          console.log('trying again in 2 seconds');
+      }, function () {
+        if($scope.fetchAttempts < 3) {
+          console.log('trying to fetch today again in 2 seconds', $scope.fetchAttempts);
           setTimeout(function () {
             $scope.refresh();
           }, 2000);
-          fetchAttempts++;
+          $scope.fetchAttempts++;
         } else {
+          console.log('giving up...');
           $scope.trades = [];
           $ionicLoading.hide();
         }
@@ -106,7 +108,7 @@ angular.module('insider.controllers', [])
     });
   })
   .controller('BuysCtrl', function ($state, $scope, BuyIdeaService, $ionicLoading) {
-    var fetchAttempts = 0;
+    $scope.fetchAttempts = 0;
 
     $scope.refresh = function () {
       $scope.loading = true;
@@ -117,14 +119,15 @@ angular.module('insider.controllers', [])
         $scope.trades = trades;
         $scope.loading = false;
         $ionicLoading.hide();
-      }, function (data) {
-        if(fetchAttempts < 3) {
-          console.log('trying again in 2 seconds');
+      }, function () {
+        if($scope.fetchAttempts < 3) {
+          console.log('trying to fetch all again in 2 seconds');
           setTimeout(function () {
             $scope.refresh();
           }, 2000);
-          fetchAttempts++;
+          $scope.fetchAttempts++;
         } else {
+          console.log('giving up...');
           $scope.trades = [];
           $ionicLoading.hide();
         }
@@ -143,11 +146,12 @@ angular.module('insider.controllers', [])
     });
   })
   .controller('TradeCtrl', function ($scope, $stateParams, BuyIdeaService) {
-    $scope.direction = "bought";
     $scope.navigateTo = function (url) {
       var ref = window.open(url, '_blank', 'location=yes');
     };
     BuyIdeaService.findById($stateParams.tradeId).then(function (trade) {
       $scope.trade = trade;
+    }, function (data) {
+      console.log(data.message);
     });
   });
