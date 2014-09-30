@@ -53,8 +53,11 @@ angular.module('insider.controllers', [])
         $scope.closeLogin();
       }).
       error(function (data) {
-        console.log(data);
-        window.alert(data);
+        if(data.message) {
+          window.alert(data.message);
+        } else {
+          window.alert("Something went wrong with your login. Try again.");
+        }
       });
     };
     // Perform the login action when the user submits the login form

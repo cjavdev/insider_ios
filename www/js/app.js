@@ -1,10 +1,5 @@
 /*global window, cordova, angular */
-// Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
 var app = angular.module('insider', ['ionic', 'insider.controllers', 'insider.services', 'ngCordova']);
 app.config.apiBase = 'http://localhost:3000';
 //app.config.apiBase = 'https://insiderai.com';
@@ -13,6 +8,14 @@ app.run(function ($http, $ionicPlatform, $cordovaPush, $rootScope) {
   if (token !== null) {
     $http.defaults.headers.common['Auth-Token-X'] = token;
   }
+  $http.get(app.config.apiBase + '/api/v1/sessions/validate.json')
+  .then(function (resp) {
+    console.log(resp.data.message);
+  }, function (resp) {
+    window.localStorage.removeItem('auth_token');
+    delete $http.defaults.headers.common['Auth-Token-X'];
+    console.log(resp.data.message);
+  });
 
   $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
