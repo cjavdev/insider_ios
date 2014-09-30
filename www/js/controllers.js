@@ -148,12 +148,12 @@ angular.module('insider.controllers', [])
       $scope.refresh();
     });
   })
-  .controller('TradeCtrl', function ($timeout, $scope, $stateParams, BuyIdeaService, CommentService) {
+  .controller('TradeCtrl', function ($rootScope, $scope, $stateParams, BuyIdeaService, CommentService) {
     $scope.commentData = {};
     $scope.showCommentBox = false;
 
     $scope.navigateTo = function (url) {
-      var ref = window.open(url, '_blank', 'location=yes');
+      window.open(url, '_blank', 'location=yes');
     };
     BuyIdeaService.findById($stateParams.tradeId).then(function (trade) {
       $scope.trade = trade;
@@ -161,16 +161,16 @@ angular.module('insider.controllers', [])
       console.log(data.message);
     });
 
+    $scope.userIsAuthorOf = function (comment) {
+      console.log(comment.author_email === $rootScope.currentUser.email);
+      return comment.author_email === $rootScope.currentUser.email;
+    };
+
     $scope.addComment = function () {
       $scope.commentData.idea_id = $scope.trade.id;
       CommentService.addComment($scope.commentData).then(function (comment) {
         $scope.trade.comments.unshift(comment);
         $scope.commentData = {};
-        // $timeout(function () {
-        //   $scope.showCommentBox = false;
-        //   $scope.$apply();
-        // });
-
       }, function (data) {
         if(data.status === 401) {
           $scope.login();
@@ -178,13 +178,11 @@ angular.module('insider.controllers', [])
       });
     };
 
-    $scope.removeComment = function (commentId) {
-      CommentService.removeComment(commentId).then(function () {
-        console.log("remove comment");
-        console.log(commentId);
+    $scope.removeComment = function (comment) {
+      CommentService.removeComment(comment.id).then(function () {
+        var commentIndex = $scope.trade.comments.indexOf(comment)
+        $scope.trade.comments.splice(commentIndex, 1);
       }, function (data) {
-        console.log("comment remove error");
-        console.log(commentId);
         console.log(data);
       });
     };

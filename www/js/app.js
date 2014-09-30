@@ -10,7 +10,8 @@ app.run(function ($http, $ionicPlatform, $cordovaPush, $rootScope) {
   }
   $http.get(app.config.apiBase + '/api/v1/sessions/validate.json')
   .then(function (resp) {
-    console.log(resp.data.message);
+    console.log(resp.data);
+    $rootScope.currentUser = resp.data.user;
   }, function (resp) {
     window.localStorage.removeItem('auth_token');
     delete $http.defaults.headers.common['Auth-Token-X'];
