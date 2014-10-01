@@ -29,13 +29,17 @@
         </ul>
       </div> <!-- item body -->
       <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#/app/companies/{{trade.company_id}}">
+          <i class="icon ion-briefcase"></i>
+        </a>
+        <a class="tab-item" href="#/app/insiders/{{trade.insider_id}}">
+          <i class="icon ion-person"></i>
+        </a>
         <a class="tab-item" ng-click="navigateTo(trade.filing_url)">
           <i class="icon ion-document-text"></i>
-          SEC Filing
         </a>
         <a class="tab-item" ng-click="showCommentBox=!showCommentBox">
           <i class="icon ion-chatbox"></i>
-          Comment
         </a>
       </div>
     </div> <!-- card -->

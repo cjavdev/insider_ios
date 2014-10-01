@@ -95,11 +95,29 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       }
     })
     .state('app.trade', {
-      url: '/trades/:tradeId',
+      url: '/trades/:id',
       views: {
         'menuContent': {
           templateUrl: 'templates/trade.html',
           controller: 'TradeCtrl'
+        }
+      }
+    })
+    .state('app.insider', {
+      url: '/insiders/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/insider.html',
+          controller: 'InsiderCtrl'
+        }
+      }
+    })
+    .state('app.company', {
+      url: '/companies/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/company.html',
+          controller: 'CompanyCtrl'
         }
       }
     })

@@ -1,0 +1,30 @@
+<ion-view title="Insider">
+  <ion-content class="has-header">
+    <div class="card">
+      <div class="item item-avatar">
+        <img src="img/insider_placeholder.png">
+        <h2>{{insider.name}}</h2>
+      </div>
+
+      <div class="item item-body">
+        A biography if available for this insider
+      </div> <!-- item body -->
+    </div> <!-- card -->
+    <ul class="list" ng-hide="company.form4s.length==0">
+      <li ng-repeat="form4 in insider.form4s" class="item-form4">
+        <div class="item item-icon-left">
+          <div class="icon icon-shares">
+            <i class="ion-arrow-up-a buy" ng-show="form4.is_buy"></i>
+            <i class="ion-arrow-down-a sell" ng-hide="form4.is_buy"></i>
+            <p>{{form4.sum_shares}}</p>
+          </div>
+          <span class="item-note">
+            {{form4.date | shortDate}}
+          </span>
+          <h3>{{form4.insider_name}}</h3>
+          <p>{{form4.insider_title}}</p>
+        </div>
+      </li>
+   </ul>
+  </ion-content>
+</ion-view>

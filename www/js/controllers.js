@@ -103,7 +103,7 @@ angular.module('insider.controllers', [])
 
     $scope.showTrade = function (id) {
       $state.go('app.trade', {
-        tradeId: id
+        id: id
       });
     };
 
@@ -141,7 +141,7 @@ angular.module('insider.controllers', [])
 
     $scope.showTrade = function (id) {
       $state.go('app.trade', {
-        tradeId: id
+        id: id
       });
     };
 
@@ -149,7 +149,7 @@ angular.module('insider.controllers', [])
       $scope.refresh();
     });
   })
-  .controller('SearchCtrl', function ($scope, SearchService) {
+  .controller('SearchCtrl', function ($state, $scope, SearchService) {
     $scope.keyword = "";
     $scope.results = [];
     $scope.search = function () {
@@ -157,7 +157,28 @@ angular.module('insider.controllers', [])
         $scope.results = resp.data;
       });
     };
+
+    $scope.openResult = function (result) {
+      var where = (result[1] === 'Insider') ? 'app.insider' : 'app.company';
+      $state.go(where, {
+        id: result[0]
+      });
+    };
     $scope.search();
+  })
+  .controller('InsiderCtrl', function ($scope, $stateParams, InsiderService) {
+    InsiderService.findById($stateParams.id).then(function (data) {
+      $scope.insider = data;
+    }, function () {
+      console.log("no insider found :(");
+    });
+  })
+  .controller('CompanyCtrl', function ($scope, $stateParams, CompanyService) {
+    CompanyService.findById($stateParams.id).then(function (data) {
+      $scope.company = data;
+    }, function () {
+      console.log("no company found :(");
+    });
   })
   .controller('TradeCtrl', function ($timeout, $ionicPopup, $rootScope, $scope, $stateParams, BuyIdeaService, CommentService) {
     $scope.commentData = {};
@@ -166,7 +187,7 @@ angular.module('insider.controllers', [])
     $scope.navigateTo = function (url) {
       window.open(url, '_blank', 'location=yes');
     };
-    BuyIdeaService.findById($stateParams.tradeId).then(function (trade) {
+    BuyIdeaService.findById($stateParams.id).then(function (trade) {
       $scope.trade = trade;
     }, function (data) {
       console.log(data.message);

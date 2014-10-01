@@ -53,3 +53,24 @@ header img {
 .push-down-10 {
   padding-top: 10%;
 }
+
+.item-form4 {
+  min-height: 74px;
+  .item {
+    min-height: 74px;
+  }
+}
+
+.icon-shares {
+  min-height: 74px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.buy {
+  color: #216C2A;
+}
+
+.sell {
+  color: #af111c;
+}

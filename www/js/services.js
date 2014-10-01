@@ -2,6 +2,46 @@
 
 var app = angular.module('insider');
 angular.module('insider.services', [])
+  .factory('InsiderService', function($q, $http) {
+    function url(id) {
+     if(id) {
+        return app.config.apiBase + '/api/v1/insiders/' + id + '.json';
+      }
+      return app.config.apiBase + '/api/v1/insiders.json';
+    }
+
+    return {
+      findById: function (id) {
+        var deferred = $q.defer();
+        $http.get(url(id)).then(function (resp) {
+          deferred.resolve(resp.data);
+        }, function (resp) {
+          deferred.reject(resp.data);
+        });
+        return deferred.promise;
+      },
+    };
+  })
+  .factory('CompanyService', function($q, $http) {
+    function url(id) {
+     if(id) {
+        return app.config.apiBase + '/api/v1/companies/' + id + '.json';
+      }
+      return app.config.apiBase + '/api/v1/companies.json';
+    }
+
+    return {
+      findById: function (id) {
+        var deferred = $q.defer();
+        $http.get(url(id)).then(function (resp) {
+          deferred.resolve(resp.data);
+        }, function (resp) {
+          deferred.reject(resp.data);
+        });
+        return deferred.promise;
+      },
+    };
+  })
   .factory('SearchService', function($http) {
     function url(q) {
       return app.config.apiBase + '/api/v1/search?q=' + q;
