@@ -49,7 +49,7 @@
         </form>
       </div>
     </div>
-    <ul class="list card">
+    <ul class="list card" ng-hide="trade.comments.length==0">
       <li ng-repeat="comment in trade.comments" ng-click="removeComment(comment)">
         <div class="item item-body">
           <img ng-srcset="{{comment.author_email | gravatar}}?s=20">
