@@ -148,7 +148,7 @@ angular.module('insider.controllers', [])
       $scope.refresh();
     });
   })
-  .controller('TradeCtrl', function ($rootScope, $scope, $stateParams, BuyIdeaService, CommentService) {
+  .controller('TradeCtrl', function ($timeout, $ionicPopup, $rootScope, $scope, $stateParams, BuyIdeaService, CommentService) {
     $scope.commentData = {};
     $scope.showCommentBox = false;
 
@@ -178,12 +178,40 @@ angular.module('insider.controllers', [])
       });
     };
 
+
     $scope.removeComment = function (comment) {
-      CommentService.removeComment(comment.id).then(function () {
-        var commentIndex = $scope.trade.comments.indexOf(comment)
-        $scope.trade.comments.splice(commentIndex, 1);
-      }, function (data) {
-        console.log(data);
+      if(!$scope.userIsAuthorOf(comment)) {
+        return;
+      }
+       var myPopup = $ionicPopup.show({
+        template: '',
+        title: 'Are you sure you want to delete your comment?',
+        subTitle: '',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel' },
+          {
+            text: '<b>Delete</b>',
+            type: 'button-assertive',
+            onTap: function() {
+              CommentService.removeComment(comment.id).then(function () {
+                var commentIndex = $scope.trade.comments.indexOf(comment)
+                $scope.trade.comments.splice(commentIndex, 1);
+                myPopup.close();
+              }, function (data) {
+                console.log(data);
+              });
+              return "test"
+            }
+          },
+        ]
       });
+      // myPopup.then(function(res) {
+      //   console.log('Tapped!', res);
+      // });
+      $timeout(function() {
+         myPopup.close(); //close the popup after 3 seconds for some reason
+      }, 3000);
+
     };
   });
