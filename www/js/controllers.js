@@ -47,6 +47,7 @@ angular.module('insider.controllers', [])
 
       $http.post(app.config.apiBase + '/api/v1/users/sign_in.json', params).
       success(function (data) {
+        $rootScope.currentUser.email = data.email;
         window.localStorage.setItem('auth_token', data.auth_token);
         $http.defaults.headers.common['Auth-Token-X'] = data.auth_token;
         $rootScope.$broadcast('authchange');
