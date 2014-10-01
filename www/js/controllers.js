@@ -149,6 +149,15 @@ angular.module('insider.controllers', [])
       $scope.refresh();
     });
   })
+  .controller('SearchCtrl', function ($scope, SearchService) {
+    $scope.results = [];
+    $scope.search = function () {
+      SearchService.search($scope.keyword).then(function (resp) {
+        $scope.results = resp.data;
+      });
+    };
+    $scope.search();
+  })
   .controller('TradeCtrl', function ($timeout, $ionicPopup, $rootScope, $scope, $stateParams, BuyIdeaService, CommentService) {
     $scope.commentData = {};
     $scope.showCommentBox = false;

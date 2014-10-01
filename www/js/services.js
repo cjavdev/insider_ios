@@ -2,6 +2,17 @@
 
 var app = angular.module('insider');
 angular.module('insider.services', [])
+  .factory('SearchService', function($http) {
+    function url(q) {
+      return app.config.apiBase + '/api/v1/search?q=' + q;
+    }
+
+    return {
+      search: function (keyword) {
+        return $http.get(url(keyword));
+      }
+    };
+  })
   .factory('CommentService', function($q, $http) {
     function url(id) {
       if(id) {

@@ -1,0 +1,16 @@
+<div class="bar bar-header item-input-inset">
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios7-search placeholder-icon"></i>
+    <input type="search" ng-change="search()" placeholder="Search" ng-model="keyword">
+  </label>
+  <button class="button button-clear">
+    Cancel
+  </button>
+</div>
+<ion-content class="has-header">
+<ion-scroll>
+<div class="list">
+  <li class="item" ng-repeat="result in results">{{result[2]}}</li>
+</div>
+</ion-scroll>
+</ion-content>
