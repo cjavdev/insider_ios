@@ -9,8 +9,24 @@
       <div class="item item-body">
         <img class="full-image" src="http://chart.finance.yahoo.com/z?s={{company.ticker}}&t=6m&q=l&l=on&z=s&p=v">
       </div> <!-- item body -->
+      <div class="item tabs">
+        <a class="tab-item" ng-click="showInsiders=!showInsiders">
+          <i class="ion-person-stalker"></i>
+           Insiders
+        </a>
+        <a class="tab-item" ng-click="showTrades=!showTrades">
+          <i class="ion-document-text"></i>
+           Trades
+        </a>
+      </div>
     </div> <!-- card -->
-    <ul class="list" ng-hide="company.form4s.length==0">
+    <ul class="list" ng-show="showInsiders">
+      <li class="item item-icon-left" ng-repeat="insider in company.insiders">
+        <i class="ion-person"></i>
+        {{insider.name}}
+      </li>
+    </ul>
+    <ul class="list" ng-show="company.form4s.length > 0 && showTrades">
       <li ng-repeat="form4 in company.form4s" class="item-form4">
         <div class="item item-icon-left">
           <div class="icon icon-shares">
