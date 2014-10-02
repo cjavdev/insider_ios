@@ -3,7 +3,7 @@
     <div class="card">
       <div class="item">
         <h2>{{company.name}}</h2>
-        <p>{{company.market_cap}}</p>
+        <p>{{company.market_cap_str}}</p>
       </div>
 
       <div class="item item-body">
@@ -14,12 +14,12 @@
       <li ng-repeat="form4 in company.form4s" class="item-form4">
         <div class="item item-icon-left">
           <div class="icon icon-shares">
-            <i class="ion-arrow-up-a buy" ng-show="form4.is_buy"></i>
-            <i class="ion-arrow-down-a sell" ng-hide="form4.is_buy"></i>
-            <p>{{form4.sum_shares}}</p>
+            <div class="ion-arrow-up-a buy" ng-show="form4.is_buy"></div>
+            <div class="ion-arrow-down-a sell" ng-hide="form4.is_buy"></div>
           </div>
-          <span class="item-note">
-            {{form4.date | shortDate}}
+          <span class="item-note align-right">
+            {{form4.date | shortDate}}<br>
+            {{form4.sum_shares}}
           </span>
           <h3>{{form4.insider_name}}</h3>
           <p>{{form4.insider_title}}</p>

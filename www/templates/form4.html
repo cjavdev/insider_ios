@@ -1,0 +1,51 @@
+<ion-view title="{{form4.ticker}}">
+  <ion-content class="has-header">
+    <div class="card">
+      <div class="item item-body">
+        <img class="full-image" src="http://chart.finance.yahoo.com/z?s={{form4.ticker}}&t=6m&q=l&l=on&z=s&p=v">
+        <ul class="list">
+
+          <li class="item">
+            {{form4.insider_name}}
+          </li>
+          <li class="item" ng-show="form4.insider_title">
+            {{form4.insider_title}}
+          </li>
+          <li class="item">
+            {{form4.ticker}}
+          </li>
+          <li class="item">
+            {{form4.sum_shares}}
+            <span class="item-note">Shares</span>
+          </li>
+          <li class="item">
+            {{form4.sum_shares_after}}
+            <span class="item-note">Shares After</span>
+          </li>
+          <li class="item">
+            {{form4.holdings_change}}
+            <span class="item-note">Holdings Change</span>
+          </li>
+        </ul>
+
+        <h3>
+        <ul class="list">
+          <li class="item">
+            stuff
+          </li>
+        </ul>
+      </div> <!-- item body -->
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#/app/companies/{{form4.company_id}}">
+          <i class="icon ion-briefcase"></i>
+        </a>
+        <a class="tab-item" href="#/app/insiders/{{form4.insider_id}}">
+          <i class="icon ion-person"></i>
+        </a>
+        <a class="tab-item" ng-click="navigateTo(form4.filing_url)">
+          <i class="icon ion-document-text"></i>
+        </a>
+      </div>
+    </div> <!-- card -->
+  </ion-content>
+</ion-view>

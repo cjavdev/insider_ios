@@ -7,7 +7,7 @@
       </div>
 
       <div class="item item-body">
-        A biography if available for this insider
+        Bio
       </div> <!-- item body -->
     </div> <!-- card -->
     <ul class="list" ng-hide="company.form4s.length==0">
@@ -16,13 +16,13 @@
           <div class="icon icon-shares">
             <i class="ion-arrow-up-a buy" ng-show="form4.is_buy"></i>
             <i class="ion-arrow-down-a sell" ng-hide="form4.is_buy"></i>
-            <p>{{form4.sum_shares}}</p>
           </div>
-          <span class="item-note">
-            {{form4.date | shortDate}}
+          <span class="item-note align-right">
+            {{form4.date | shortDate}} <br>
+            {{form4.sum_shares}}
           </span>
-          <h3>{{form4.insider_name}}</h3>
-          <p>{{form4.insider_title}}</p>
+          <h3>{{form4.ticker}}</h3>
+          <p>{{form4.market_cap}}</p>
         </div>
       </li>
    </ul>

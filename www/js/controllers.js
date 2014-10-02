@@ -166,6 +166,13 @@ angular.module('insider.controllers', [])
     };
     $scope.search();
   })
+  .controller('Form4Ctrl', function ($scope, $stateParams, Form4Service) {
+    Form4Service.findById($stateParams.id).then(function (data) {
+      $scope.form4 = data;
+    }, function () {
+      console.log("no form4 found :(");
+    });
+  })
   .controller('InsiderCtrl', function ($scope, $stateParams, InsiderService) {
     InsiderService.findById($stateParams.id).then(function (data) {
       $scope.insider = data;

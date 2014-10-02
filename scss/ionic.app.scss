@@ -61,16 +61,14 @@ header img {
   }
 }
 
-.icon-shares {
-  min-height: 74px;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .buy {
   color: #216C2A;
 }
 
 .sell {
   color: #af111c;
+}
+
+.align-right {
+  text-align: right;
 }

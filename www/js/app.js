@@ -1,8 +1,8 @@
 /*global window, cordova, angular */
 
 var app = angular.module('insider', ['ionic', 'insider.controllers', 'insider.services', 'insider.filters', 'ngCordova']);
-//app.config.apiBase = 'http://localhost:3000';
-app.config.apiBase = 'https://insiderai.com';
+app.config.apiBase = 'http://localhost:3000';
+//app.config.apiBase = 'https://insiderai.com';
 app.run(function ($http, $ionicPlatform, $cordovaPush, $rootScope) {
   $rootScope.currentUser = {};
   var token = window.localStorage.getItem('auth_token');
@@ -109,6 +109,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         'menuContent': {
           templateUrl: 'templates/insider.html',
           controller: 'InsiderCtrl'
+        }
+      }
+    })
+    .state('app.form4', {
+      url: '/form4s/:id',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/form4.html',
+          controller: 'Form4Ctrl'
         }
       }
     })

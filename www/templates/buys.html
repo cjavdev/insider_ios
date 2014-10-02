@@ -36,11 +36,11 @@
         <div class="item item-image">
           <img class="full-image" src="http://chart.finance.yahoo.com/z?s={{trade.ticker}}&t=6m&q=l&l=on&z=s&p=v">
         </div>
-        <div class="item tabs tabs-secondary tabs-icon-left">
-          <span class="item-note">
-            {{trade.sum_shares}} shares.
-            {{trade.holdings_change}}% change.
-          </span>
+        <div class="item item-body">
+          {{trade.insider_name}}<span ng-if="trade.insider_title">,</span> 
+          {{trade.insider_title}} bought {{(trade.sum_shares).abbr(1)}} shares to hold 
+          {{(trade.sum_shares_after).abbr(1)}}.  This is a {{trade.holdings_change}}% 
+          change in holdings.
         </div>
       </div>
     </ion-list>
