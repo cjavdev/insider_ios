@@ -8,10 +8,11 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  javascript: ['./www/js/**/*.js']
+  javascript: ['./js/**/*(!spec).js']
 };
 
 gulp.task('default', ['sass']);
@@ -30,15 +31,20 @@ gulp.task('sass', function(done) {
 
 gulp.task('javascript', function() {
   gulp.src([
-    './www/js/app.js',
-    './www/js/filters/*.js',
-    './www/js/services/*.js',
-    './www/js/controllers/*.js'
+    './js/app.js',
+    './js/filters/*.js',
+    './js/services/*.js',
+    './js/controllers/*(!spec).js'
     ])
     .pipe(sourcemaps.init())
     .pipe(concat('all.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./www/dist_js'));
+    .pipe(gulp.dest('./www/js'));
+});
+
+gulp.task('spec', function () {
+  gulp.src('./spec/**/*.js')
+    .pipe(jasmine());
 });
 
 gulp.task('watch', function() {
