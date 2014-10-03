@@ -1,6 +1,4 @@
 /*globals angular, md5 */
-
-var app = angular.module('insider');
 var today = new Date(),
     thisYear = today.getFullYear();
 angular.module('insider.filters', [])

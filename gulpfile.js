@@ -2,13 +2,16 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
+var order = require('gulp-order');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./scss/**/*.scss'],
+  javascript: ['./www/js/**/*.js']
 };
 
 gulp.task('default', ['sass']);
@@ -25,8 +28,22 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
+gulp.task('javascript', function() {
+  gulp.src([
+    './www/js/app.js',
+    './www/js/filters/*.js',
+    './www/js/services/*.js',
+    './www/js/controllers/*.js'
+    ])
+    .pipe(sourcemaps.init())
+    .pipe(concat('all.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./www/dist_js'));
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.javascript, ['javascript']);
 });
 
 gulp.task('install', ['git-check'], function() {
