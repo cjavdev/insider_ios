@@ -1,25 +1,21 @@
-// angular.module('insider.filters', [])
-// .filter('gravatar', function () {
-//   return function (email) {
-//     return "http://www.gravatar.com/avatar/" + md5(email);
-//   };
-// })
-// .filter('shortDate', function () {
-//   return function (date) {
-//     var d = new Date(date),
-//       month = d.getMonth() + 1,
-//       day = d.getDay() + 1,
-//       year = d.getFullYear();
-//
-//     if(year === thisYear) {
-//        return month + "/" + day;
-//     }
-//     return year + "/" + month + "/" + day;
-//   };
-// });
-/*globals describe, it, expect */
-describe("A suite", function () {
-  it("contains spec with an expectation", function () {
-    expect(true).toBe(true);
+/*globals describe, it, expect, beforeEach, inject */
+describe('insider', function () {
+  beforeEach(function () {
+    module('insider');
+  });
+
+  it('has a gravatar filter', inject(function ($filter) {
+    expect($filter('gravatar')).not.toBeNull();
+  }));
+
+  describe('gravatarFilter', function () {
+    beforeEach(function () {
+      module('insider.filters');
+    });
+
+    it('should return a gravatar url', inject(function(gravatarFilter) {
+      expect(gravatarFilter('cjavilla@gmail.com'))
+        .toEqual("http://www.gravatar.com/avatar/8d86681ad6ec3a97871c60e3f2e51c0e");
+    }));
   });
 });

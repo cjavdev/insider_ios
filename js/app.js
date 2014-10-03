@@ -118,32 +118,34 @@ var app = angular.module('insider', [
         "ecb": "onNotificationAPN"
       };
 
-      $cordovaPush.register(iosConfig).then(function (result) {
-        $rootScope.deviceToken = result;
-      }, function (err) {
-        console.log("not able to send push", err);
-      });
-      // $cordovaPush.unregister(options).then(function(result) {
-      //   alert("unregister");
-      //   alert(result);
-      //   alert(arguments);
-      //     // Success!
-      // }, function(err) {
-      //   alert("error");
-      //   alert(err);
-      //     // An error occured. Show a message to the user
-      // });
-      //
-      // // iOS only
-      // $cordovaPush.setBadgeNumber(2).then(function(result) {
-      //   alert("set badge to 2!");
-      //   alert(result);
-      //   alert(arguments);
-      //     // Success!
-      // }, function(err) {
-      //   alert("error");
-      //   alert(err);
-      //     // An error occured. Show a message to the user
-      // });
+      if(window.cordova) {
+        $cordovaPush.register(iosConfig).then(function (result) {
+          $rootScope.deviceToken = result;
+        }, function (err) {
+          console.log("not able to send push", err);
+        });
+        // $cordovaPush.unregister(options).then(function(result) {
+        //   alert("unregister");
+        //   alert(result);
+        //   alert(arguments);
+        //     // Success!
+        // }, function(err) {
+        //   alert("error");
+        //   alert(err);
+        //     // An error occured. Show a message to the user
+        // });
+        //
+        // // iOS only
+        // $cordovaPush.setBadgeNumber(2).then(function(result) {
+        //   alert("set badge to 2!");
+        //   alert(result);
+        //   alert(arguments);
+        //     // Success!
+        // }, function(err) {
+        //   alert("error");
+        //   alert(err);
+        //     // An error occured. Show a message to the user
+        // });
+      }
     });
   });
