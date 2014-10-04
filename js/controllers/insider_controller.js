@@ -17,4 +17,4 @@ angular.module('insider.controllers')
         id: form4.id
       });
     };
- });
+  });

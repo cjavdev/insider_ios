@@ -1,6 +1,6 @@
 /*globals angular, window */
 angular.module('insider.controllers')
-  .controller('TradeCtrl', function ($timeout, $ionicPopup, $rootScope, $scope, $stateParams, BuyIdeaService, CommentService, AuthService) {
+  .controller('TradeCtrl', function ($timeout, $ionicPopup, $scope, $stateParams, BuyIdeaService, CommentService, AuthService) {
     $scope.commentData = {};
     $scope.showCommentBox = false;
 
@@ -21,8 +21,7 @@ angular.module('insider.controllers')
     $scope.refresh();
 
     $scope.userIsAuthorOf = function (comment) {
-      console.log(comment.author_email === AuthService.currentUser().email);
-      return comment.author_email === $rootScope.currentUser.email;
+      return comment.author_email === AuthService.currentUser().email;
     };
 
     $scope.addComment = function () {

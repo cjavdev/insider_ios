@@ -57,7 +57,6 @@ angular.module('insider.controllers', [])
           return deferred.resolve(d);
         }, function (err) {
           if (maxTries === -1) {
-            console.log("giving up...");
             $ionicLoading.hide();
             return deferred.reject(err);
           } else {

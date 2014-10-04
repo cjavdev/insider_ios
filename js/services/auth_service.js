@@ -8,6 +8,7 @@ angular.module('insider.services', [])
       try {
         if (storedUser) {
           user = JSON.parse(storedUser);
+          $http.defaults.headers.common['Auth-Token-X'] = user.auth_token;
         }
       } catch (ignore) { /* fail silently*/ }
     };
@@ -65,10 +66,20 @@ angular.module('insider.services', [])
       return $http.delete(loc.apiBase + '/api/v1/users/sign_out.json');
     };
 
+    var validateUser = function () {
+      $http.get(loc.apiBase + '/api/v1/sessions/validate.json')
+        .then(function (resp) {
+          saveUser(resp.data.user);
+        }, function () {
+          clearUser();
+        });
+    };
+
     return {
       doLogin: doLogin,
       doLogout: doLogout,
       loggedIn: loggedIn,
-      currentUser: currentUser
+      currentUser: currentUser,
+      validateUser: validateUser
     };
   });

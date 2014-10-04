@@ -16,7 +16,6 @@ angular.module('insider.services')
           var doc = JSON.parse(resp.data.filing);
           filing.nonDerivativeTransactions = doc.transactions;
           filing.derivativeTransactions = doc.derivative_transactions;
-          console.log(filing);
           deferred.resolve(filing);
         }, function (resp) {
           deferred.reject(resp.data);

@@ -7,6 +7,7 @@
           console.log(trades);
           $scope.trades = trades;
         }, function () {
+          // TODO: show no trades found thing
           console.log("sad face");
         });
     };
