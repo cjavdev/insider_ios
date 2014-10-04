@@ -12,7 +12,12 @@ angular.module('insider.services')
       findById: function (id) {
         var deferred = $q.defer();
         $http.get(url(id)).then(function (resp) {
-          deferred.resolve(resp.data);
+          var filing = resp.data;
+          var doc = JSON.parse(resp.data.filing);
+          filing.nonDerivativeTransactions = doc.transactions;
+          filing.derivativeTransactions = doc.derivative_transactions;
+          console.log(filing);
+          deferred.resolve(filing);
         }, function (resp) {
           deferred.reject(resp.data);
         });

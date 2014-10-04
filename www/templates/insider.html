@@ -11,7 +11,7 @@
       </div> <!-- item body -->
     </div> <!-- card -->
     <ul class="list" ng-hide="company.form4s.length==0">
-      <li ng-repeat="form4 in insider.form4s" class="item-form4">
+      <li ng-click="goToForm4(form4)" ng-repeat="form4 in insider.form4s" class="item-form4">
         <div class="item item-icon-left">
           <div class="icon icon-shares">
             <i class="ion-arrow-up-a buy" ng-show="form4.is_buy"></i>

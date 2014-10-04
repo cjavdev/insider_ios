@@ -28,16 +28,11 @@
           </li>
         </ul>
 
-        <h3>
-        <ul class="list">
-          <li class="item">
-            stuff
-          </li>
-        </ul>
       </div> <!-- item body -->
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" href="#/app/companies/{{form4.company_id}}">
           <i class="icon ion-briefcase"></i>
+          {{form4.ticker}}
         </a>
         <a class="tab-item" href="#/app/insiders/{{form4.insider_id}}">
           <i class="icon ion-person"></i>
@@ -45,8 +40,32 @@
         </a>
         <a class="tab-item" ng-click="navigateTo(form4.filing_url)">
           <i class="icon ion-document-text"></i>
+          Filing
         </a>
       </div>
     </div> <!-- card -->
+
+    <ul class="list" ng-show="form4.nonDerivativeTransactions.length > 0">
+      <li class="item item-divider">
+        Non Derivative Transactions
+      </li>
+      <li class="item" ng-repeat="transaction in form4.nonDerivativeTransactions">
+        {{transaction.acquired_or_disposed_code}}
+        {{transaction.direct_or_indirect_code}}
+        {{transaction.shares}}
+        {{transaction.shares_after}}
+      </li>
+      <li class="item item-divider">
+        Derivative Transactions
+      </li>
+      <li class="item" ng-repeat="transaction in form4.derivativeTransactions">
+        {{transaction.acquired_or_disposed_code}}
+        {{transaction.conversion_or_exercise_price}}
+        {{transaction.security_title}}
+        {{transaction.direct_or_indirect_code}}
+        {{transaction.shares}}
+        {{transaction.shares_after}}
+      </li>
+    </ul>
   </ion-content>
 </ion-view>
