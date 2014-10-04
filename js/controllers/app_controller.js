@@ -60,10 +60,11 @@ angular.module('insider.controllers', [])
             console.log("giving up...");
             $ionicLoading.hide();
             return deferred.reject(err);
+          } else {
+            $timeout(function() {
+              $scope.retryWithPromise(promise, args, maxTries - 1, context, deferred);
+            }, 2000);
           }
-          $timeout(function() {
-            $scope.retryWithPromise(promise, args, maxTries - 1, context, deferred);
-          }, 2000);
         });
       return deferred.promise;
     };

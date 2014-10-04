@@ -4,7 +4,7 @@ angular.module('insider.controllers')
     $scope.trades = [];
 
     $scope.refresh = function () {
-      $scope.retryWithPromise(BuyIdeaService.findtodays, [], 3, this)
+      $scope.retryWithPromise(BuyIdeaService.findTodays, [], 3, this)
         .then(function (trades) {
           $scope.trades = trades;
         }, function () {

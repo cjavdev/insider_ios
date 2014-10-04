@@ -10,5 +10,9 @@ angular.module('insider.controllers')
         });
     };
 
+    $scope.navigateTo = function (url) {
+      window.open(url, '_blank', 'location=yes');
+    };
+
     $scope.refresh();
   });
