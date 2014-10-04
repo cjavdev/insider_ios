@@ -11,11 +11,13 @@
       </div> <!-- item body -->
       <div class="item tabs">
         <a class="tab-item" ng-click="showInsiders=!showInsiders">
-          <i class="icon ion-person-stalker"></i>
+          <i ng-if="!showInsiders" class="icon ion-ios7-people-outline"></i>
+          <i ng-if="showInsiders" class="icon ion-ios7-people"></i>
            Insiders
         </a>
         <a class="tab-item" ng-click="showTrades=!showTrades">
-          <i class="icon ion-document-text"></i>
+          <i ng-if="!showTrades" class="icon ion-ios7-paper-outline"></i>
+          <i ng-if="showTrades" class="icon ion-ios7-paper"></i>
            Trades
         </a>
       </div>

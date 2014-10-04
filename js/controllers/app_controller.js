@@ -58,6 +58,7 @@ angular.module('insider.controllers', [])
         }, function (err) {
           if (maxTries === -1) {
             $ionicLoading.hide();
+            $scope.loading = false;
             return deferred.reject(err);
           } else {
             $timeout(function() {
