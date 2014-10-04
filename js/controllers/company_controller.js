@@ -1,6 +1,6 @@
 /*globals angular, window */
 angular.module('insider.controllers')
-  .controller('CompanyCtrl', function ($scope, $stateParams, CompanyService) {
+  .controller('CompanyCtrl', function ($state, $scope, $stateParams, CompanyService) {
     $scope.showTrades = true;
 
     $scope.refresh = function () {
@@ -13,4 +13,16 @@ angular.module('insider.controllers')
     };
 
     $scope.refresh();
+
+    $scope.goToInsider = function (insider) {
+      $state.go('app.insider', {
+        id: insider.id
+      });
+    };
+
+    $scope.goToForm4 = function (form4) {
+      $state.go('app.form4', {
+        id: form4.id
+      });
+    };
   });

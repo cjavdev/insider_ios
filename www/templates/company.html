@@ -21,13 +21,13 @@
       </div>
     </div> <!-- card -->
     <ul class="list" ng-show="showInsiders">
-      <li class="item item-icon-left" ng-repeat="insider in company.insiders">
+      <li class="item item-icon-left" ng-repeat="insider in company.insiders" ng-click="goToInsider(insider)">
         <i class="icon ion-person"></i>
         {{insider.name}}
       </li>
     </ul>
     <ul class="list" ng-show="company.form4s.length > 0 && showTrades">
-      <li ng-repeat="form4 in company.form4s" class="item-form4">
+      <li ng-repeat="form4 in company.form4s" ng-click="goToForm4(form4)" class="item-form4">
         <div class="item item-icon-left">
           <div class="icon icon-shares">
             <div class="ion-arrow-up-a buy" ng-show="form4.is_buy"></div>
