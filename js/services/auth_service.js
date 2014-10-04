@@ -68,6 +68,7 @@ angular.module('insider.services', [])
     return {
       doLogin: doLogin,
       doLogout: doLogout,
-      loggedIn: loggedIn
+      loggedIn: loggedIn,
+      currentUser: currentUser
     };
   });
