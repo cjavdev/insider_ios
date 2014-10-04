@@ -7,15 +7,15 @@
       </div>
 
       <div class="item item-body">
-        <img class="full-image" src="http://chart.finance.yahoo.com/z?s={{company.ticker}}&t=6m&q=l&l=on&z=s&p=v">
+        <img class="full-image" ng-src="http://chart.finance.yahoo.com/z?s={{company.ticker}}&t=6m&q=l&l=on&z=s&p=v">
       </div> <!-- item body -->
       <div class="item tabs">
         <a class="tab-item" ng-click="showInsiders=!showInsiders">
-          <i class="ion-person-stalker"></i>
+          <i class="icon ion-person-stalker"></i>
            Insiders
         </a>
         <a class="tab-item" ng-click="showTrades=!showTrades">
-          <i class="ion-document-text"></i>
+          <i class="icon ion-document-text"></i>
            Trades
         </a>
       </div>

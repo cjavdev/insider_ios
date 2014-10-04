@@ -2,13 +2,13 @@
   <ion-content class="has-header">
     <div class="card">
       <div class="item item-avatar">
-        <img src="img/insider_placeholder.png">
+        <img ng-src="img/insider_placeholder.png">
         <h2>{{trade.insider_name}}</h2>
         <p>{{trade.insider_title}}</p>
       </div>
 
       <div class="item item-body">
-        <img class="full-image" src="http://chart.finance.yahoo.com/z?s={{trade.ticker}}&t=6m&q=l&l=on&z=s&p=v">
+        <img class="full-image" ng-src="http://chart.finance.yahoo.com/z?s={{trade.ticker}}&t=6m&q=l&l=on&z=s&p=v">
         <ul class="list">
           <li class="item">
             {{trade.sum_shares}}
@@ -30,7 +30,7 @@
       </div> <!-- item body -->
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" href="#/app/companies/{{trade.company_id}}">
-          <i class="icon ion-briefcase"></i>
+          <i class="icon ion-arrow-graph-up-right"></i>
         </a>
         <a class="tab-item" href="#/app/insiders/{{trade.insider_id}}">
           <i class="icon ion-person"></i>
