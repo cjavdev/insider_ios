@@ -1,6 +1,6 @@
 /*globals angular, window */
 angular.module('insider.controllers')
-  .controller('TradeCtrl', function ($ionicLoading, $timeout, $ionicPopup, $rootScope, $scope, $stateParams, BuyIdeaService, CommentService) {
+  .controller('TradeCtrl', function ($timeout, $ionicPopup, $rootScope, $scope, $stateParams, BuyIdeaService, CommentService, AuthService) {
     $scope.commentData = {};
     $scope.showCommentBox = false;
 
@@ -10,34 +10,18 @@ angular.module('insider.controllers')
 
     $scope.fetchAttempts = 0;
     $scope.refresh = function () {
-      $scope.loading = true;
-      $ionicLoading.show({
-        template: "<i class='ion-loading-d'></i>"
-      });
-
-      BuyIdeaService.findById($stateParams.id)
+      $scope.retryWithPromise(BuyIdeaService.findById, [$stateParams.id], 3, this)
         .then(function (trade) {
           $scope.trade = trade;
-          $scope.loading = false;
-          $ionicLoading.hide();
         }, function () {
-          if ($scope.fetchAttempts < 3) {
-            console.log('trying to fetch today again in 2 seconds', $scope.fetchAttempts);
-            setTimeout(function () {
-              $scope.refresh();
-            }, 2000);
-            $scope.fetchAttempts++;
-          } else {
-            console.log('giving up...');
-            $scope.trades = [];
-            $ionicLoading.hide();
-          }
+          console.log("sad face");
         });
     };
+
     $scope.refresh();
 
     $scope.userIsAuthorOf = function (comment) {
-      console.log(comment.author_email === $rootScope.currentUser.email);
+      console.log(comment.author_email === AuthService.currentUser().email);
       return comment.author_email === $rootScope.currentUser.email;
     };
 
@@ -69,13 +53,13 @@ angular.module('insider.controllers')
           type: 'button-assertive',
           onTap: function () {
             CommentService.removeComment(comment.id).then(function () {
-              var commentIndex = $scope.trade.comments.indexOf(comment)
+              var commentIndex = $scope.trade.comments.indexOf(comment);
               $scope.trade.comments.splice(commentIndex, 1);
               myPopup.close();
             }, function (data) {
               console.log(data);
             });
-            return "test"
+            return "test";
           }
         }, ]
       });

@@ -1,14 +1,14 @@
 /*global window, cordova, angular */
 var app = angular.module('insider', [
     'ionic',
-    'insider.controllers',
     'insider.services',
+    'insider.controllers',
     'insider.filters',
     'ngCordova'
   ])
   .constant('loc', {
-    //apiBase: 'http://localhost:3000'
-    apiBase: 'https://insiderai.com'
+    apiBase: 'http://localhost:3000'
+    //apiBase: 'https://insiderai.com'
   })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider

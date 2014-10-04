@@ -1,5 +1,5 @@
 /*globals angular, _ */
-angular.module('insider.services', [])
+angular.module('insider.services')
   .factory('CommentService', function(loc, $q, $http) {
     function url(id) {
       if(id) {

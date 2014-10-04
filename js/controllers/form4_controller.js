@@ -1,9 +1,14 @@
 /*globals angular, window */
 angular.module('insider.controllers')
   .controller('Form4Ctrl', function ($scope, $stateParams, Form4Service) {
-    Form4Service.findById($stateParams.id).then(function (data) {
-      $scope.form4 = data;
-    }, function () {
-      console.log("no form4 found :(");
-    });
+    $scope.refresh = function () {
+      $scope.retryWithPromise(Form4Service.findById, [$stateParams.id], 3, this)
+        .then(function (form4Data) {
+          $scope.form4 = form4Data;
+        }, function () {
+          console.log("sad face");
+        });
+    };
+
+    $scope.refresh();
   });

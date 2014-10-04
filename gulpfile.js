@@ -12,7 +12,7 @@ var jasmine = require('gulp-jasmine');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  javascript: ['./js/**/*(!spec).js']
+  javascript: ['./js/**/*.js']
 };
 
 gulp.task('default', ['sass']);
@@ -34,7 +34,7 @@ gulp.task('javascript', function() {
     './js/app.js',
     './js/filters/*.js',
     './js/services/*.js',
-    './js/controllers/*(!spec).js'
+    './js/controllers/*.js'
     ])
     .pipe(sourcemaps.init())
     .pipe(concat('all.js'))

@@ -4,6 +4,8 @@ angular.module('insider.controllers')
     $scope.keyword = "";
     $scope.results = [];
     $scope.search = function () {
+
+
       SearchService.search($scope.keyword).then(function (resp) {
         $scope.results = resp.data;
       });
