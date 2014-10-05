@@ -1,6 +1,8 @@
 /*globals angular, window */
 angular.module('insider.controllers')
   .controller('InsiderCtrl', function ($state, $scope, $stateParams, InsiderService) {
+    $scope.showTrades = true;
+
     $scope.refresh = function () {
       $scope.retryWithPromise(InsiderService.findById, [$stateParams.id], 3, this)
         .then(function (insiderData) {

@@ -38,7 +38,7 @@
         <a class="tab-item" ng-click="navigateTo(trade.filing_url)">
           <i class="icon ion-ios7-paper"></i>
         </a>
-        <a class="tab-item" ng-click="showCommentBox=!showCommentBox">
+        <a class="tab-item" ng-click="showCommentBox=!showCommentBox; focusOnCommentBody()">
           <i class="icon ion-chatbox"></i>
         </a>
       </div>
@@ -47,13 +47,13 @@
       <div class="list list-inset">
         <form ng-submit="addComment()">
           <label class="item item-input">
-            <textarea ng-model="commentData.body" placeholder="Comment"></textarea>
+            <textarea id="comment-body" ng-model="commentData.body" placeholder="Comment"></textarea>
           </label>
           <input type="submit" ng-click="showCommentBox=!showCommentBox" class="button button-block button-royal" value="Send">
         </form>
       </div>
     </div>
-    <ul class="list card" ng-hide="trade.comments.length==0">
+    <ul class="list" ng-hide="trade.comments.length==0">
       <li ng-repeat="comment in trade.comments" on-swipe-left="removeComment(comment)">
         <div class="item item-body">
           <img ng-srcset="{{comment.author_email | gravatar}}?s=20">

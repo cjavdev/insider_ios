@@ -9,8 +9,26 @@
       <div class="item item-body">
         Bio
       </div> <!-- item body -->
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" ng-click="showCompanies=!showCompanies">
+          <i ng-if="!showCompanies" class="icon ion-arrow-graph-up-right"></i>
+          <i ng-if="showCompanies" class="icon ion-arrow-graph-up-right"></i>
+           Companies
+        </a>
+        <a class="tab-item" ng-click="showTrades=!showTrades">
+          <i ng-if="!showTrades" class="icon ion-ios7-paper-outline"></i>
+          <i ng-if="showTrades" class="icon ion-ios7-paper"></i>
+           Trades
+        </a>
+      </div>
     </div> <!-- card -->
-    <ul class="list" ng-hide="company.form4s.length==0">
+    <ul class="list" ng-show="showCompanies">
+      <li class="item item-icon-left" ng-click="goToCompany(company)" ng-repeat="company in insider.companies">
+        <i class="icon ion-arrow-graph-up-right"></i>
+        {{company.ticker}}
+      </li>
+    </ul>
+    <ul class="list" ng-show="showTrades">
       <li ng-click="goToForm4(form4)" ng-repeat="form4 in insider.form4s" class="item-form4">
         <div class="item item-icon-left">
           <div class="icon icon-shares">

@@ -1,4 +1,4 @@
-/*globals angular, window */
+/*globals angular, window, document */
 angular.module('insider.controllers')
   .controller('TradeCtrl', function ($timeout, $ionicPopup, $scope, $stateParams, BuyIdeaService, CommentService, AuthService) {
     $scope.commentData = {};
@@ -6,6 +6,12 @@ angular.module('insider.controllers')
 
     $scope.navigateTo = function (url) {
       window.open(url, '_blank', 'location=yes');
+    };
+
+    $scope.focusOnCommentBody = function () {
+      $timeout(function () {
+        document.getElementById('comment-body').focus();
+      }, 150);
     };
 
     $scope.fetchAttempts = 0;
@@ -31,6 +37,7 @@ angular.module('insider.controllers')
         $scope.commentData = {};
       }, function (data) {
         if (data.status === 401) {
+          $scope.showCommentBox = true;
           $scope.login();
         }
       });
