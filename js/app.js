@@ -7,8 +7,8 @@ var app = angular.module('insider', [
     'ngCordova'
   ])
   .constant('loc', {
-    apiBase: 'http://localhost:3000'
-    //apiBase: 'https://insiderai.com'
+    //apiBase: 'http://localhost:3000'
+    apiBase: 'https://insiderai.com'
   })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider

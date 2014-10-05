@@ -14,6 +14,11 @@ angular.module('insider.controllers')
 
     $scope.refresh();
 
+    $scope.goToCompany = function (company) {
+      $state.go('app.company', {
+        id: company.id
+      });
+    };
     $scope.goToForm4 = function (form4) {
       $state.go('app.form4', {
         id: form4.id
