@@ -11,7 +11,10 @@
         <i class="icon ion-email"></i>
         Email
         <label class="toggle toggle-royal">
-          <input type="checkbox">
+          <input type="checkbox"
+            ng-model="user.gets_email"
+            ng-checked="user.gets_email"
+            ng-change="toggleSetting('gets_email')">
           <div class="track">
             <div class="handle"></div>
           </div>
@@ -21,7 +24,10 @@
         <i class="icon ion-radio-waves"></i>
         Push
         <label class="toggle toggle-royal">
-          <input type="checkbox">
+          <input type="checkbox"
+            ng-checked="user.gets_ios_push"
+            ng-model="user.gets_ios_push"
+            ng-change="toggleSetting('gets_ios_push')">
           <div class="track">
             <div class="handle"></div>
           </div>

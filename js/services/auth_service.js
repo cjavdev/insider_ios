@@ -49,14 +49,13 @@ angular.module('insider.services', [])
 
       var deferred = $q.defer();
 
-      $http.post(loc.apiBase + '/api/v1/users/sign_in.json', params).
-      success(function (userData) {
-        saveUser(userData);
-        deferred.resolve(userData);
-      }).
-      error(function (data) {
-        deferred.reject(data);
-      });
+      $http.post(loc.apiBase + '/api/v1/users/sign_in.json', params)
+        .then(function (resp) {
+          saveUser(resp.data.user);
+          deferred.resolve(resp.data);
+        }, function (data) {
+          deferred.reject(data);
+        });
 
       return deferred.promise;
     };
@@ -80,6 +79,7 @@ angular.module('insider.services', [])
       doLogout: doLogout,
       loggedIn: loggedIn,
       currentUser: currentUser,
-      validateUser: validateUser
+      validateUser: validateUser,
+      saveUser: saveUser
     };
   });
