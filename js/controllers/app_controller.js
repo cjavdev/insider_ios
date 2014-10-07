@@ -72,7 +72,7 @@ angular.module('insider.controllers', [])
       return deferred.promise;
     };
 
-    $scope.retryWithPromiseScrollToRefresh = function (promise, args, maxTries, context, deferred) {
+    $scope.retryWithPromisePullToRefresh = function (promise, args, maxTries, context, deferred) {
       deferred = deferred || $q.defer();
       context = context || null;
 

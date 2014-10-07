@@ -2,7 +2,7 @@
  angular.module('insider.controllers')
   .controller('BuysCtrl', function ($state, $scope, BuyIdeaService) {
     $scope.refresh = function () {
-      $scope.retryWithPromiseScrollToRefresh(BuyIdeaService.findAll, [], 3, this)
+      $scope.retryWithPromisePullToRefresh(BuyIdeaService.findAll, [], 3, this)
         .then(function (trades) {
           $scope.trades = trades;
         }, function () {
