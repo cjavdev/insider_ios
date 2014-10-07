@@ -93,7 +93,7 @@ var app = angular.module('insider', [
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/buys');
   })
-  .run(function ($ionicPlatform, $cordovaPush, $rootScope, AuthService) {
+  .run(function ($state, $ionicPlatform, $cordovaPush, $rootScope, AuthService) {
     AuthService.validateUser();
 
     $ionicPlatform.ready(function () {
@@ -114,7 +114,7 @@ var app = angular.module('insider', [
         "ecb": "onNotificationAPN"
       };
 
-      if(window.cordova) {
+      if (window.cordova) {
         $cordovaPush.register(iosConfig).then(function (result) {
           $rootScope.deviceToken = result;
         }, function (err) {
@@ -132,16 +132,28 @@ var app = angular.module('insider', [
         // });
         //
         // // iOS only
-        // $cordovaPush.setBadgeNumber(2).then(function(result) {
-        //   alert("set badge to 2!");
-        //   alert(result);
-        //   alert(arguments);
-        //     // Success!
-        // }, function(err) {
-        //   alert("error");
-        //   alert(err);
-        //     // An error occured. Show a message to the user
-        // });
+
+        window.onNotificationAPN = function(e) {
+          console.log('on notification:', e);
+          if (e.alert) {
+            $state.go('app.trade', {
+              id: e.idea_id
+            });
+          }
+
+          if (e.sound) {
+            var snd = new Media(e.sound);
+            snd.play();
+          }
+
+          if (e.badge) {
+            $cordovaPush.setBadgeNumber(e.badge).then(function (result) {
+              console.log(result);
+            }, function (err) {
+              console.log(err);
+            });
+          }
+        };
       }
     });
   });
