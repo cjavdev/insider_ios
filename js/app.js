@@ -81,6 +81,15 @@ var app = angular.module('insider', [
           }
         }
       })
+      .state('app.disclaimer', {
+        url: '/disclaimer',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/disclaimer.html',
+            controller: 'DisclaimerCtrl'
+          }
+        }
+      })
       .state('app.settings', {
         url: '/settings',
         views: {
