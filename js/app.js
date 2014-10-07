@@ -94,23 +94,7 @@ var app = angular.module('insider', [
     $urlRouterProvider.otherwise('/app/buys');
   })
   .run(function ($ionicPlatform, $cordovaPush, $rootScope, AuthService) {
-    console.log("validating user");
     AuthService.validateUser();
-    // $rootScope.currentUser = {};
-    // var token = window.localStorage.getItem('auth_token');
-    // if (token !== null) {
-    //   $http.defaults.headers.common['Auth-Token-X'] = token;
-    // }
-    //
-    // $http.get(loc.apiBase + '/api/v1/sessions/validate.json')
-    //   .then(function (resp) {
-    //     console.log(resp.data);
-    //     $rootScope.currentUser = resp.data.user;
-    //   }, function (resp) {
-    //     window.localStorage.removeItem('auth_token');
-    //     delete $http.defaults.headers.common['Auth-Token-X'];
-    //     console.log(resp.data.message);
-    //   });
 
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

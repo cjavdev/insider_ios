@@ -4,11 +4,10 @@
     $scope.refresh = function () {
       $scope.retryWithPromise(BuyIdeaService.findAll, [], 3, this)
         .then(function (trades) {
-          console.log(trades);
           $scope.trades = trades;
         }, function () {
           // TODO: show no trades found thing
-          console.log("sad face");
+          $scope.trades = [];
         });
     };
 

@@ -62,16 +62,11 @@ angular.module('insider.controllers')
               var commentIndex = $scope.trade.comments.indexOf(comment);
               $scope.trade.comments.splice(commentIndex, 1);
               myPopup.close();
-            }, function (data) {
-              console.log(data);
             });
             return "test";
           }
         }, ]
       });
-      // myPopup.then(function(res) {
-      //   console.log('Tapped!', res);
-      // });
       $timeout(function () {
         myPopup.close(); //close the popup after 3 seconds for some reason
       }, 3000);
