@@ -1,4 +1,4 @@
-/*globals angular, window */
+/*globals angular, window, document */
 angular.module('insider.controllers', [])
   .controller('AppCtrl', function ($timeout, $ionicLoading, $q, $scope, $ionicModal, $rootScope, AuthService) {
     $scope.loginData = {};
@@ -15,6 +15,9 @@ angular.module('insider.controllers', [])
 
     $scope.login = function () {
       $scope.modal.show();
+      $timeout(function () {
+        document.getElementById('user-email').focus();
+      }, 100);
     };
 
     $scope.logout = function () {
