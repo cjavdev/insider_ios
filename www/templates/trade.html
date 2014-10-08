@@ -43,23 +43,5 @@
         </a>
       </div>
     </div> <!-- card -->
-    <div class="card" ng-show="showCommentBox">
-      <div class="list list-inset">
-        <form ng-submit="addComment()">
-          <label class="item item-input">
-            <textarea id="comment-body" ng-model="commentData.body" placeholder="Comment"></textarea>
-          </label>
-          <input type="submit" ng-click="showCommentBox=!showCommentBox" class="button button-block button-royal" value="Send">
-        </form>
-      </div>
-    </div>
-    <ul class="list" ng-hide="trade.comments.length==0">
-      <li ng-repeat="comment in trade.comments" on-swipe-left="removeComment(comment)">
-        <div class="item item-body">
-          <img ng-srcset="{{comment.author_email | gravatar}}?s=20">
-          {{comment.body}}
-        </div>
-      </li>
-   </ul>
   </ion-content>
 </ion-view>
