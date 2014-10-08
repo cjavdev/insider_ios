@@ -11,29 +11,32 @@ angular.module('insider.services')
     return {
       findAll: function () {
         var deferred = $q.defer();
-        $http.get(url()).then(function (resp) {
-          deferred.resolve(resp.data);
-        }, function (resp) {
-          deferred.reject(resp.data);
-        });
+        $http.get(url(), { cache: true })
+          .then(function (resp) {
+            deferred.resolve(resp.data);
+          }, function (resp) {
+            deferred.reject(resp.data);
+          });
         return deferred.promise;
       },
 
       findById: function (id) {
         var deferred = $q.defer();
-        $http.get(url(id)).then(function (resp) {
-          deferred.resolve(resp.data);
-        }, function (resp) {
-          deferred.reject(resp.data);
-        });
+        $http.get(url(id), { cache: true })
+          .then(function (resp) {
+            deferred.resolve(resp.data);
+          }, function (resp) {
+            deferred.reject(resp.data);
+          });
         return deferred.promise;
       },
 
       findTodays: function () {
         var deferred = $q.defer();
-        $http.get(url(), { params: { 'today': true } }).then(function (resp) {
-          deferred.resolve(resp.data);
-        });
+        $http.get(url(), { params: { 'today': true }, cache: true })
+          .then(function (resp) {
+            deferred.resolve(resp.data);
+          });
         return deferred.promise;
       }
     };

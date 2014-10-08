@@ -7,7 +7,7 @@ angular.module('insider.services')
 
     return {
       search: function (keyword) {
-        return $http.get(url(keyword));
+        return $http.get(url(keyword), { cache: true });
       }
     };
   });

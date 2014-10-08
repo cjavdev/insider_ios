@@ -1,7 +1,7 @@
 /*globals angular, window */
  angular.module('insider.controllers')
-  .controller('BuysCtrl', function ($state, $scope, BuyIdeaService) {
-    $scope.refresh = function () {
+  .controller('BuysCtrl', function ($cacheFactory, $state, $scope, loc, BuyIdeaService) {
+    var loadRemote = function () {
       $scope.retryWithPromisePullToRefresh(BuyIdeaService.findAll, [], 3, this)
         .then(function (trades) {
           $scope.trades = trades;
@@ -10,8 +10,14 @@
           $scope.trades = [];
         });
     };
+    loadRemote();
 
-    $scope.refresh();
+    $scope.refresh = function () {
+      var cache = $cacheFactory.get('$http');
+      cache.remove(loc.apiBase + '/api/v1/buys.json');
+      loadRemote();
+    };
+
 
     $scope.showTrade = function (id) {
       $state.go('app.trade', {

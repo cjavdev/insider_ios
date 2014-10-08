@@ -1,9 +1,9 @@
 /*globals angular, window */
 angular.module('insider.controllers')
- .controller('TodaysBuysCtrl', function ($state, $scope, BuyIdeaService) {
+ .controller('TodaysBuysCtrl', function ($cacheFactory, $state, $scope, loc, BuyIdeaService) {
     $scope.trades = [];
 
-    $scope.refresh = function () {
+    var loadRemote = function () {
       $scope.retryWithPromisePullToRefresh(BuyIdeaService.findTodays, [], 3, this)
         .then(function (trades) {
           $scope.trades = trades;
@@ -11,8 +11,13 @@ angular.module('insider.controllers')
           console.log("sad face");
         });
     };
+    loadRemote();
 
-    $scope.refresh();
+    $scope.refresh = function () {
+      var cache = $cacheFactory.get('$http');
+      cache.remove(loc.apiBase + '/api/v1/buys.json?today=true');
+      loadRemote();
+    };
 
     $scope.showTrade = function (id) {
       $state.go('app.trade', {

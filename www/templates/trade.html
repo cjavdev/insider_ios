@@ -31,15 +31,15 @@
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a class="tab-item" href="#/app/companies/{{trade.company_id}}">
           <i class="icon ion-arrow-graph-up-right"></i>
+          {{trade.ticker}}
         </a>
         <a class="tab-item" href="#/app/insiders/{{trade.insider_id}}">
           <i class="icon ion-person"></i>
+          {{trade.insider_name}}
         </a>
         <a class="tab-item" ng-click="navigateTo(trade.filing_url)">
           <i class="icon ion-ios7-paper"></i>
-        </a>
-        <a class="tab-item" ng-click="showCommentBox=!showCommentBox; focusOnCommentBody()">
-          <i class="icon ion-chatbox"></i>
+          Filing
         </a>
       </div>
     </div> <!-- card -->
