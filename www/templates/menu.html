@@ -17,6 +17,9 @@
         <ion-item ng-if="!loggedIn()" nav-clear menu-close ng-click="login()">
           <i class="icon-left ion-log-in"></i> Login
         </ion-item>
+        <ion-item ng-if="!loggedIn()" nav-clear menu-close href='#/app/upgrade'>
+          <i class="icon-left ion-ribbon-b"></i> Upgrade
+        </ion-item>
         <ion-item nav-clear menu-close href="#/app/today">
           <i class="icon-left ion-ios7-lightbulb"></i> Today's Buys
         </ion-item>

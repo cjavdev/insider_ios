@@ -81,6 +81,15 @@ var app = angular.module('insider', [
           }
         }
       })
+      .state('app.upgrade', {
+        url: '/upgrade',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/upgrade.html',
+            controller: 'UpgradeCtrl'
+          }
+        }
+      })
       .state('app.disclaimer', {
         url: '/disclaimer',
         views: {
@@ -111,6 +120,32 @@ var app = angular.module('insider', [
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
+
+      if (window.cordova && window.storekit) {
+        window.storekit.init({
+          debug: true,
+          ready: function () {
+            window.storekit.load(["com.insiderai.ios.basic1"], function (products, invalidIds) {
+              console.log("In-app purchases are ready to go");
+            });
+          },
+          purchase: function (transactionId, productId, receipt) {
+            if (productId === 'com.insiderai.ios.basic1') {
+              console.log("Purchased product id 1");
+            }
+          },
+          restore: function (transactionId, productId, transactionReceipt) {
+            if (productId === 'com.insiderai.ios.basic1') {
+              console.log("Restored product id 1 purchase")
+              // in this case need to set the currentUser to something... not sure what yet
+            }
+          },
+          error: function (errorCode, errorMessage) {
+            console.log("ERROR: " + errorMessage);
+          }
+        });
+      }
+
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
         window.StatusBar.styleLightContent();
@@ -142,7 +177,7 @@ var app = angular.module('insider', [
         //
         // // iOS only
 
-        window.onNotificationAPN = function(e) {
+        window.onNotificationAPN = function (e) {
           console.log('on notification:', e);
           if (e.alert) {
             $state.go('app.trade', {
