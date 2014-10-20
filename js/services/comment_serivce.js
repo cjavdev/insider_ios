@@ -1,9 +1,9 @@
 /*globals angular, _ */
 angular.module('insider.services')
   .factory('CommentService', function(loc, $q, $http) {
-    function url(id) {
+    function url(id, type) {
       if(id) {
-        return loc.apiBase + '/api/v1/comments/' + id + '.json';
+        return loc.apiBase + '/api/v1/comments/' + id + '/' + type + '.json';
       }
       return loc.apiBase + '/api/v1/comments.json';
     }
@@ -19,8 +19,8 @@ angular.module('insider.services')
         return deferred.promise;
       },
 
-      removeComment: function (id) {
-        return $http.delete(url(id));
+      removeComment: function (id, type) {
+        return $http.delete(url(id, type));
       }
     };
   });

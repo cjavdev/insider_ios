@@ -18,7 +18,6 @@
       loadRemote();
     };
 
-
     $scope.showTrade = function (id) {
       $state.go('app.trade', {
         id: id
