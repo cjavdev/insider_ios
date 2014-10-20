@@ -38,7 +38,7 @@ angular.module('insider.services', [])
       return !!currentUser();
     };
 
-    var doLogin = function (userParams, deviceToken) {
+    var sendUser = function (userParams, deviceToken, url) {
       var params = {
         user: userParams,
         device: {
@@ -49,7 +49,7 @@ angular.module('insider.services', [])
 
       var deferred = $q.defer();
 
-      $http.post(loc.apiBase + '/api/v1/users/sign_in.json', params)
+      $http.post(url, params)
         .then(function (resp) {
           saveUser(resp.data.user);
           deferred.resolve(resp.data);
@@ -58,6 +58,16 @@ angular.module('insider.services', [])
         });
 
       return deferred.promise;
+    };
+
+    var doRegister = function (userParams, deviceToken) {
+      var url = loc.apiBase + '/api/v1/users.json';
+      return sendUser(userParams, deviceToken, url);
+    };
+
+    var doLogin = function (userParams, deviceToken) {
+      var url = loc.apiBase + '/api/v1/users/sign_in.json';
+      return sendUser(userParams, deviceToken, url);
     };
 
     var doLogout = function () {
@@ -77,6 +87,7 @@ angular.module('insider.services', [])
     return {
       doLogin: doLogin,
       doLogout: doLogout,
+      doRegister: doRegister,
       loggedIn: loggedIn,
       currentUser: currentUser,
       validateUser: validateUser,

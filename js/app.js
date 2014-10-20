@@ -7,8 +7,8 @@ var app = angular.module('insider', [
     'ngCordova'
   ])
   .constant('loc', {
-    //apiBase: 'http://localhost:3000'
-    apiBase: 'https://insiderai.com'
+    apiBase: 'http://localhost:3000'
+    //apiBase: 'https://insiderai.com'
   })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -132,6 +132,7 @@ var app = angular.module('insider', [
           purchase: function (transactionId, productId, receipt) {
             if (productId === 'com.insiderai.ios.basic1') {
               console.log("Purchased product id 1");
+              // also need to do something about currentUser here
             }
           },
           restore: function (transactionId, productId, transactionReceipt) {

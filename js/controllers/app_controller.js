@@ -15,9 +15,7 @@ angular.module('insider.controllers', [])
 
     $scope.login = function () {
       $scope.modal.show();
-      //$timeout(function () {
-        document.getElementById('user-email').focus();
-      //}, 0);
+      document.getElementById('user-email').focus();
     };
 
     $scope.logout = function () {
