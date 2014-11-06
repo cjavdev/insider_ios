@@ -12,7 +12,7 @@
       <div class="row push-down-30">
         <div class="pull-center" style="text-align: center">
           <i class="quiet icon-huge ion-sad"></i>
-          <h4 class="quiet">No interesting trades currently.</h4>
+          <h4 class="quiet">No interesting trades yet.</h4>
         </div>
       </div>
 
@@ -33,7 +33,7 @@
           <strong>
             {{trade.ticker}}
           </strong>
-          <span class="item-note">
+          <span class="item-note" ng-show="trade.market_cap_str != 0">
             {{trade.market_cap_str}}
           </span>
         </div>
