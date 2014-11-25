@@ -42,28 +42,5 @@
         </a>
       </div>
     </div> <!-- card -->
-
-    <ul class="list" ng-show="form4.nonDerivativeTransactions.length > 0">
-      <li class="item item-divider">
-        Non Derivative Transactions
-      </li>
-      <li class="item" ng-repeat="transaction in form4.nonDerivativeTransactions">
-        {{transaction.acquired_or_disposed_code}}
-        {{transaction.direct_or_indirect_code}}
-        {{transaction.shares}}
-        {{transaction.shares_after}}
-      </li>
-      <li class="item item-divider">
-        Derivative Transactions
-      </li>
-      <li class="item" ng-repeat="transaction in form4.derivativeTransactions">
-        {{transaction.acquired_or_disposed_code}}
-        {{transaction.conversion_or_exercise_price}}
-        {{transaction.security_title}}
-        {{transaction.direct_or_indirect_code}}
-        {{transaction.shares}}
-        {{transaction.shares_after}}
-      </li>
-    </ul>
   </ion-content>
 </ion-view>

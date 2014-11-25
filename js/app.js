@@ -4,7 +4,8 @@ var app = angular.module('insider', [
     'insider.services',
     'insider.controllers',
     'insider.filters',
-    'ngCordova'
+    'ngCordova',
+    'ngStorekit'
   ])
   .constant('loc', {
     //apiBase: 'http://localhost:3000'
@@ -111,7 +112,7 @@ var app = angular.module('insider', [
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/buys');
   })
-  .run(function ($state, $ionicPlatform, $cordovaPush, $rootScope, AuthService) {
+  .run(function ($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit, AuthService) {
     AuthService.validateUser();
 
     $ionicPlatform.ready(function () {
@@ -121,31 +122,15 @@ var app = angular.module('insider', [
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
 
-      if (window.cordova && window.storekit) {
-        window.storekit.init({
-          debug: true,
-          ready: function () {
-            window.storekit.load(["com.insiderai.ios.basic1"], function (products, invalidIds) {
-              console.log("In-app purchases are ready to go");
-            });
-          },
-          purchase: function (transactionId, productId, receipt) {
-            if (productId === 'com.insiderai.ios.basic1') {
-              console.log("Purchased product id 1");
-              // also need to do something about currentUser here
-            }
-          },
-          restore: function (transactionId, productId, transactionReceipt) {
-            if (productId === 'com.insiderai.ios.basic1') {
-              console.log("Restored product id 1 purchase")
-              // in this case need to set the currentUser to something... not sure what yet
-            }
-          },
-          error: function (errorCode, errorMessage) {
-            console.log("ERROR: " + errorMessage);
-          }
+      $storekit
+        .setLogging(true)
+        .load(['com.insiderai.ios.basic1'])
+        .then(function (products) {
+          console.log('products loaded', JSON.stringify(products));
+        })
+        .catch(function () {
+          console.log('no products loaded');
         });
-      }
 
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required

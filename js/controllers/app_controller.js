@@ -1,7 +1,14 @@
 /*globals angular, window, document */
 angular.module('insider.controllers', [])
-  .controller('AppCtrl', function ($timeout, $ionicLoading, $q, $scope, $ionicModal, $rootScope, AuthService) {
+  .controller('AppCtrl', function ($timeout, $ionicLoading, $q, $scope, $ionicModal, $rootScope, $storekit, AuthService) {
     $scope.loginData = {};
+
+    var products = $storekit.getProducts();
+    products.forEach(function (product) {
+      console.log(product.productId);
+      console.log(product.description);
+      console.log(product.price);
+    });
 
     $ionicModal.fromTemplateUrl('templates/login.html', {
       scope: $scope
@@ -62,7 +69,7 @@ angular.module('insider.controllers', [])
             $scope.loading = false;
             return deferred.reject(err);
           } else {
-            $timeout(function() {
+            $timeout(function () {
               $scope.retryWithPromise(promise, args, maxTries - 1, context, deferred);
             }, 2000);
           }
@@ -86,7 +93,7 @@ angular.module('insider.controllers', [])
             $scope.loading = false;
             return deferred.reject(err);
           } else {
-            $timeout(function() {
+            $timeout(function () {
               $scope.retryWithPromise(promise, args, maxTries - 1, context, deferred);
             }, 2000);
           }

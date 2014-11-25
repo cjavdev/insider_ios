@@ -1,0 +1,15 @@
+{
+  "name": "ng-storekit",
+  "homepage": "https://github.com/AlexDisler/ng-storekit",
+  "version": "0.0.4",
+  "_release": "0.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.4",
+    "commit": "a7cdce5d2a0a850063cd66705ee763dab2d7bd50"
+  },
+  "_source": "git://github.com/AlexDisler/ng-storekit.git",
+  "_target": "~0.0.4",
+  "_originalSource": "ng-storekit",
+  "_direct": true
+}
