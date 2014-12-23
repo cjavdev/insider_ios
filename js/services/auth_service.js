@@ -25,12 +25,17 @@ angular.module('insider.services', [])
     var saveUser = function (userToSave) {
       user = userToSave;
       window.localStorage.setItem('user', JSON.stringify(user));
-      $http.defaults.headers.common['Auth-Token-X'] = user.auth_token;
+      if(user.auth_token) {
+        $http.defaults.headers.common['Auth-Token-X'] = user.auth_token;
+      } else if(user.api_key) {
+        $http.defaults.headers.common['API-Key-X'] = user.api_key;
+      }
     };
 
     var clearUser = function () {
       window.localStorage.removeItem('user');
       $http.defaults.headers.common['Auth-Token-X'] = undefined;
+      $http.defaults.headers.common['API-Key-X'] = undefined;
       user = null;
     };
 

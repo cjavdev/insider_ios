@@ -5,6 +5,7 @@ angular.module('insider.controllers', [])
 
     var products = $storekit.getProducts();
     products.forEach(function (product) {
+      console.log('logging products from AppCtrl');
       console.log(product.productId);
       console.log(product.description);
       console.log(product.price);

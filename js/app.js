@@ -82,15 +82,6 @@ var app = angular.module('insider', [
           }
         }
       })
-      .state('app.upgrade', {
-        url: '/upgrade',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/upgrade.html',
-            controller: 'UpgradeCtrl'
-          }
-        }
-      })
       .state('app.disclaimer', {
         url: '/disclaimer',
         views: {
@@ -112,8 +103,7 @@ var app = angular.module('insider', [
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/buys');
   })
-  .run(function ($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit, AuthService) {
-    AuthService.validateUser();
+  .run(function ($state, $ionicPlatform, $cordovaPush, $rootScope) {
 
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -121,16 +111,6 @@ var app = angular.module('insider', [
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
-
-      $storekit
-        .setLogging(true)
-        .load(['com.insiderai.ios.basic1'])
-        .then(function (products) {
-          console.log('products loaded', JSON.stringify(products));
-        })
-        .catch(function () {
-          console.log('no products loaded');
-        });
 
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
