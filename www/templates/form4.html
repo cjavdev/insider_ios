@@ -5,7 +5,7 @@
         <img class="full-image" ng-src="http://chart.finance.yahoo.com/z?s={{form4.ticker}}&t=6m&q=l&l=on&z=s&p=v">
         <ul class="list">
           <li class="item">
-            {{form4.insider_name}}
+            <strong>{{form4.insider_name}}</strong>
           </li>
           <li class="item" ng-show="form4.insider_title">
             {{form4.insider_title}}
@@ -20,10 +20,6 @@
           <li class="item">
             {{form4.sum_shares_after}}
             <span class="item-note">Shares After</span>
-          </li>
-          <li class="item">
-            {{form4.holdings_change}}
-            <span class="item-note">Holdings Change</span>
           </li>
         </ul>
 
