@@ -3,7 +3,6 @@ var app = angular.module('insider', [
     'ionic',
     'insider.services',
     'insider.controllers',
-    'insider.filters',
     'ngCordova',
     'ngStorekit'
   ])
@@ -11,8 +10,13 @@ var app = angular.module('insider', [
     //apiBase: 'http://localhost:3000'
     apiBase: 'https://insiderai.com'
   })
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+      })
       .state('app', {
         url: '/app',
         abstract: true,
@@ -90,22 +94,26 @@ var app = angular.module('insider', [
             controller: 'DisclaimerCtrl'
           }
         }
-      })
-      .state('app.settings', {
-        url: '/settings',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/settings.html',
-            controller: 'SettingsCtrl'
-          }
-        }
       });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/buys');
   })
-  .run(function ($state, $ionicPlatform, $cordovaPush, $rootScope) {
-
-    $ionicPlatform.ready(function () {
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('authHttpResponseInterceptor');
+  }])
+  .run(function($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit) {
+    $ionicPlatform.ready(function() {
+      $ionicPlatform.ready(function() {
+        $storekit
+          .setLogging(true)
+          .load(['com.insiderai.ios.insideralerts1'])
+          .then(function(products) {
+            console.log('products loaded');
+          })
+          .catch(function() {
+            console.log('no products loaded');
+          });
+      });
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -125,9 +133,9 @@ var app = angular.module('insider', [
       };
 
       if (window.cordova) {
-        $cordovaPush.register(iosConfig).then(function (result) {
+        $cordovaPush.register(iosConfig).then(function(result) {
           $rootScope.deviceToken = result;
-        }, function (err) {
+        }, function(err) {
           console.log("not able to send push", err);
         });
         // $cordovaPush.unregister(options).then(function(result) {
@@ -143,7 +151,7 @@ var app = angular.module('insider', [
         //
         // // iOS only
 
-        window.onNotificationAPN = function (e) {
+        window.onNotificationAPN = function(e) {
           console.log('on notification:', e);
           if (e.alert) {
             $state.go('app.trade', {
@@ -157,9 +165,9 @@ var app = angular.module('insider', [
           }
 
           if (e.badge) {
-            $cordovaPush.setBadgeNumber(e.badge).then(function (result) {
+            $cordovaPush.setBadgeNumber(e.badge).then(function(result) {
               console.log(result);
-            }, function (err) {
+            }, function(err) {
               console.log(err);
             });
           }

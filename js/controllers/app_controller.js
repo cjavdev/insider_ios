@@ -1,54 +1,7 @@
 /*globals angular, window, document */
 angular.module('insider.controllers', [])
-  .controller('AppCtrl', function ($timeout, $ionicLoading, $q, $scope, $ionicModal, $rootScope, $storekit, AuthService) {
+  .controller('AppCtrl', function ($timeout, $ionicLoading, $q, $scope, $ionicModal, $rootScope) {
     $scope.loginData = {};
-
-    var products = $storekit.getProducts();
-    products.forEach(function (product) {
-      console.log('logging products from AppCtrl');
-      console.log(product.productId);
-      console.log(product.description);
-      console.log(product.price);
-    });
-
-    $ionicModal.fromTemplateUrl('templates/login.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
-
-    $scope.closeLogin = function () {
-      $scope.modal.hide();
-    };
-
-    $scope.login = function () {
-      $scope.modal.show();
-      document.getElementById('user-email').focus();
-    };
-
-    $scope.logout = function () {
-      AuthService.doLogout().then(function () {
-        $rootScope.$broadcast("authchange");
-      });
-    };
-
-    $scope.loggedIn = function () {
-      return AuthService.loggedIn();
-    };
-
-    $scope.doLogin = function () {
-      AuthService.doLogin($scope.loginData, $rootScope.deviceToken)
-        .then(function () {
-          $rootScope.$broadcast('authchange');
-          $scope.closeLogin();
-        }, function (data) {
-          if (data.message) {
-            window.alert(data.message);
-          } else {
-            window.alert("Something went wrong with your login. Try again.");
-          }
-        });
-    };
 
     $scope.retryWithPromise = function (promise, args, maxTries, context, deferred) {
       deferred = deferred || $q.defer();
