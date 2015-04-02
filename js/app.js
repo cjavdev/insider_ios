@@ -12,6 +12,11 @@ var app = angular.module('insider', [
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
+      .state('register', {
+        url: '/register',
+        templateUrl: 'templates/register.html',
+        controller: 'RegisterCtrl'
+      })
       .state('login', {
         url: '/login',
         templateUrl: 'templates/login.html',

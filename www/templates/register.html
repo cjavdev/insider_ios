@@ -1,30 +1,46 @@
-<div class="modal">
-  <ion-header-bar>
-    <h1 class="title">Register</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeRegister()">Close</button>
+<ion-view view-title="Login">
+  <ion-content class="padding">
+    <h1>Register</h1>
+    <div ng-if="errorMessage.length" class="errors">
+      {{errorMessage}}
     </div>
-  </ion-header-bar>
-  <ion-content>
     <form ng-submit="doRegister()">
       <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input id="user-email" type="email" ng-model="userData.email">
-        </label>
-        <label class="item item-input">
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Username</span>
-          <input id="user-email" type="text" ng-model="userData.username">
+          <input
+            type="text"
+            class="big-input"
+            ng-model="user.username"
+            placeholder="Username">
         </label>
-        <label class="item item-input">
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input
+            type="text"
+            class="big-input"
+            ng-model="user.email"
+            placeholder="Email">
+        </label>
+
+        <label class="item item-input item-stacked-label">
           <span class="input-label">Password</span>
-          <input type="password" ng-model="userData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-royal" type="submit">Register</button>
+          <input
+            type="password"
+            class="big-input"
+            ng-model="user.password"
+            placeholder="Password">
         </label>
       </div>
-    </form>
-  </ion-content>
-</div>
 
+      <button class="button button-block button-royal">
+        Register
+      </button>
+    </form>
+    <hr>
+    <a href="#/login" class="button button-block">
+      Already have an account?
+    </a>
+  </ion-content>
+</ion-view>
