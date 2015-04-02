@@ -18,7 +18,7 @@ angular.module('insider.controllers', [])
           $ionicLoading.hide();
           return deferred.resolve(d);
         }, function (err) {
-          if (maxTries === -1) {
+          if (maxTries === -1 || err.status == 401) {
             $ionicLoading.hide();
             $scope.loading = false;
             return deferred.reject(err);
@@ -42,7 +42,7 @@ angular.module('insider.controllers', [])
           $scope.$broadcast('scroll.refreshComplete');
           return deferred.resolve(d);
         }, function (err) {
-          if (maxTries === -1) {
+          if (maxTries === -1 || err.status == 401) {
             $scope.$broadcast('scroll.refreshComplete');
             $scope.loading = false;
             return deferred.reject(err);
