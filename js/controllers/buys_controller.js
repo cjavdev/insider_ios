@@ -14,7 +14,7 @@
 
     $scope.refresh = function () {
       var cache = $cacheFactory.get('$http');
-      cache.remove(loc.apiBase + '/api/v1/buys.json');
+      cache.remove(loc.apiBase + '/api/v2/buys.json');
       loadRemote();
     };
 

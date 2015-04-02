@@ -1,5 +1,9 @@
 <ion-view view-title="Login">
   <ion-content class="padding">
+    <h1>Sign In</h1>
+    <div ng-if="errorMessage.length" class="errors">
+      {{errorMessage}}
+    </div>
     <form ng-submit="doLogin()">
       <div class="list">
         <label class="item item-input item-stacked-label">

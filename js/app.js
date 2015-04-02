@@ -7,8 +7,8 @@ var app = angular.module('insider', [
     'ngStorekit'
   ])
   .constant('loc', {
-    //apiBase: 'http://localhost:3000'
-    apiBase: 'https://insiderai.com'
+    apiBase: 'http://localhost:3002'
+    // apiBase: 'https://insiderai.com'
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -99,6 +99,7 @@ var app = angular.module('insider', [
     $urlRouterProvider.otherwise('/app/buys');
   })
   .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
     $httpProvider.interceptors.push('authHttpResponseInterceptor');
   }])
   .run(function($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit) {

@@ -3,9 +3,9 @@ angular.module('insider.services')
   .factory('BuyIdeaService', function(loc, $q, $http) {
     function url(id) {
       if(id) {
-        return loc.apiBase + '/api/v1/buys/' + id + '.json';
+        return loc.apiBase + '/api/v2/buys/' + id + '.json';
       }
-      return loc.apiBase + '/api/v1/buys.json';
+      return loc.apiBase + '/api/v2/buys.json';
     }
 
     return {
