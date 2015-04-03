@@ -7,8 +7,8 @@ var app = angular.module('insider', [
     'ngStorekit'
   ])
   .constant('loc', {
-    apiBase: 'http://localhost:3002'
-    // apiBase: 'https://insiderai.com'
+    // apiBase: 'http://localhost:3002'
+    apiBase: 'https://insiderai.com'
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -16,6 +16,11 @@ var app = angular.module('insider', [
         url: '/register',
         templateUrl: 'templates/register.html',
         controller: 'RegisterCtrl'
+      })
+      .state('subscribe', {
+        url: '/subscribe',
+        templateUrl: 'templates/subscribe.html',
+        controller: 'SubscribeCtrl'
       })
       .state('login', {
         url: '/login',
@@ -109,17 +114,19 @@ var app = angular.module('insider', [
   }])
   .run(function($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit) {
     $ionicPlatform.ready(function() {
-      $ionicPlatform.ready(function() {
-        $storekit
-          .setLogging(true)
-          .load(['com.insiderai.ios.insideralerts1'])
-          .then(function(products) {
-            console.log('products loaded');
-          })
-          .catch(function() {
-            console.log('no products loaded');
-          });
-      });
+      $storekit
+        .setLogging(true)
+        .load(['com.insiderai.ios.insideralerts1'])
+        .then(function(products) {
+          $rootScope.products = products;
+          console.log(products);
+          console.log('products loaded');
+        })
+        .catch(function() {
+          $rootScope.products = [];
+          console.log('product load error', arguments);
+        });
+
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {

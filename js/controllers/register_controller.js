@@ -1,6 +1,6 @@
 angular.module('insider.controllers')
-  .controller('RegisterCtrl', function ($state, $scope, $location, RegisterService) {
-    $scope.user = {};
+  .controller('RegisterCtrl', function ($state, $scope, $rootScope, $location, RegisterService) {
+    $scope.user = { device_token: $rootScope.deviceToken };
     $scope.errorMessage = '';
     $scope.doRegister = function () {
       $scope.errorMessage = '';

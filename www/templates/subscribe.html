@@ -1,0 +1,25 @@
+<ion-view view-title="Subscription">
+  <ion-header-bar align-title="center" class="bar-royal">
+    <h1 class="title">Subscribe</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div ng-if="errorMessage.length" class="errors">
+      {{errorMessage}}
+    </div>
+
+    <strong>Continue to get access to the most actionable leads
+    from legal insider trading.</strong>
+
+    <form ng-submit="doSubscribe()">
+      <button class="button button-block button-royal">
+        Subscribe (1 year): $49.99
+      </button>
+    </form>
+
+    <hr>
+
+    <a href="#/login" class="button button-block">
+      Already have an account?
+    </a>
+  </ion-content>
+</ion-view>

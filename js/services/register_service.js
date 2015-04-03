@@ -7,6 +7,7 @@ angular.module('insider.services')
 
     return {
       register: function (userParams) {
+        userParams.platform = 'ios';
         return $http.post(url(), userParams);
       }
     };
