@@ -8,7 +8,7 @@ angular.module('insider.controllers', [])
       }, function(error) {
         // An error occured. Show a message to the user
       }, function(purchase) {
-        if (purchase.productId === 'com.insiderai.ios.insideralerts1') {
+        if (purchase.productId === 'com.insiderai.ios.yr') {
           if (purchase.type === 'purchase') {
             console.log('purchased!');
             // Your product was purchased

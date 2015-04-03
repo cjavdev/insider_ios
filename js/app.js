@@ -7,8 +7,8 @@ var app = angular.module('insider', [
     'ngStorekit'
   ])
   .constant('loc', {
-    // apiBase: 'http://localhost:3002'
-    apiBase: 'https://insiderai.com'
+    apiBase: 'http://localhost:3002'
+    // apiBase: 'https://insiderai.com'
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -125,7 +125,7 @@ var app = angular.module('insider', [
     $ionicPlatform.ready(function() {
       $storekit
         .setLogging(true)
-        .load(['com.insiderai.ios.insideralerts1'])
+        .load(['com.insiderai.ios.1yr'])
         .then(function(products) {
           $rootScope.products = products;
           console.log(products);
