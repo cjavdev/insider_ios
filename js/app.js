@@ -33,6 +33,15 @@ var app = angular.module('insider', [
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
       })
+      .state('app.feedback', {
+        url: '/feedback',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/feedback.html',
+            controller: 'FeedbackCtrl'
+          }
+        }
+      })
       .state('app.buys', {
         url: '/buys',
         views: {
