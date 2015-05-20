@@ -7,6 +7,7 @@ angular.module('insider.services')
 
     return {
       login: function (userParams) {
+        console.log(userParams);
         return $http.post(url(), userParams);
       }
     };

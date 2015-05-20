@@ -7,8 +7,8 @@ var app = angular.module('insider', [
     'ngStorekit'
   ])
   .constant('loc', {
-    apiBase: 'http://localhost:3002'
-    // apiBase: 'https://insiderai.com'
+    // apiBase: 'http://localhost:3002'
+    apiBase: 'https://insiderai.com'
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -48,6 +48,15 @@ var app = angular.module('insider', [
           'menuContent': {
             templateUrl: 'templates/buys.html',
             controller: 'BuysCtrl'
+          }
+        }
+      })
+      .state('app.form4s', {
+        url: '/form4s',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/form4s.html',
+            controller: 'Form4sCtrl'
           }
         }
       })
@@ -123,6 +132,7 @@ var app = angular.module('insider', [
   }])
   .run(function($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit) {
     $ionicPlatform.ready(function() {
+      console.log('platform ready');
       $storekit
         .setLogging(true)
         .load(['com.insiderai.ios.1yr'])
@@ -154,8 +164,11 @@ var app = angular.module('insider', [
         "ecb": "onNotificationAPN"
       };
 
+      console.log('window.cordova?:' + window.cordova);
       if (window.cordova) {
+        console.log('trying cordova push registration');
         $cordovaPush.register(iosConfig).then(function(result) {
+          console.log('DEVICE TOKEN:' + result);
           $rootScope.deviceToken = result;
         }, function(err) {
           console.log("not able to send push", err);

@@ -1,7 +1,8 @@
 angular.module('insider.controllers')
-  .controller('LoginCtrl', function ($state, $scope, $location, $window, LoginService) {
+  .controller('LoginCtrl', function ($state, $scope, $rootScope, $location, $window, LoginService) {
     $scope.user = {
-      email: $window.localStorage.email
+      email: $window.localStorage.email,
+      device: { platform: 'ios', token: $rootScope.deviceToken }
     };
     $scope.errorMessage = "";
     $scope.doLogin = function () {

@@ -1,4 +1,4 @@
-<ion-view title="Current Buys">
+<ion-view title="Today's Filings">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
@@ -12,7 +12,7 @@
       <div class="row push-down-30">
         <div class="pull-center" style="text-align: center">
           <i class="quiet icon-huge ion-sad"></i>
-          <h4 class="quiet">No interesting trades yet.</h4>
+          <h4 class="quiet">No filings yet today.</h4>
         </div>
       </div>
 
@@ -24,26 +24,30 @@
         </div>
       </div>
     </div>
-    <div class="card" ng-repeat="trade in trades" ng-click="showTrade({{trade.id}})" href="#/app/trades/{{trade.id}}">
+    <div class="card" ng-repeat="form4 in form4s track by form4.id"
+      ng-click="showTrade({{form4.id}})" href="#/app/trades/{{form4.id}}">
         <div class="item icon-left">
-          <i class="icon-big ion-arrow-up-a balanced"></i>
+          <i ng-if="form4.sum_shares > 0" class="icon-big ion-arrow-up-a balanced"></i>
+          <i ng-if="form4.sum_shares < 0" class="icon-big ion-arrow-down-a
+            assertive"></i>
           <strong>
-            {{trade.ticker}}
+            {{form4.ticker}}
           </strong>
           <span class="item-note" ng-show="trade.market_cap_str != 0">
-            {{trade.market_cap_str}}
+            {{form4.market_cap_str}}
           </span>
         </div>
-        <div class="item item-image">
-          <img class="full-image" ng-src="http://chart.finance.yahoo.com/z?s={{trade.ticker}}&t=6m&q=l&l=on&z=s&p=v">
-        </div>
         <div class="item item-body">
-          <strong>{{trade.insider_name}}</strong><span ng-if="trade.insider_title">,</span>
-          {{trade.insider_title}} bought
-          <strong>{{(trade.sum_shares).abbr(1)}}</strong> shares to own
-          {{(trade.sum_shares_after).abbr(1)}}.
+          <strong>{{form4.insider_name}}</strong><span ng-if="form4.insider_title">,</span>
+          {{form4.insider_title}}
+          <span ng-if="form4.sum_shares > 0">bought</span>
+          <span ng-if="form4.sum_shares < 0">sold</span>
+          <strong>{{(form4.sum_shares).abbr(1)}}</strong> shares to own
+          {{(form4.sum_shares_after).abbr(1)}}.
         </div>
       </div>
     </ion-list>
+    <ion-infinite-scroll on-infinite="fetchMore()" distance="10%">
+    </ion-infinite-scroll>
   </ion-content>
 </ion-view>
