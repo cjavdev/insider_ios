@@ -1,6 +1,7 @@
 /*globals angular, window */
 angular.module('insider.controllers')
  .controller('TodaysBuysCtrl', function ($cacheFactory, $state, $scope, loc, BuyIdeaService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Todays Buys Controller"); }
     $scope.trades = [];
 
     var loadRemote = function () {

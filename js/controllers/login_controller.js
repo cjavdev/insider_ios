@@ -1,5 +1,6 @@
 angular.module('insider.controllers')
   .controller('LoginCtrl', function ($state, $scope, $rootScope, $location, $window, LoginService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Login Controller"); }
     $scope.user = {
       email: $window.localStorage.email,
       password: $window.localStorage.password,
@@ -10,6 +11,7 @@ angular.module('insider.controllers')
     $scope.doLogin = function () {
       $scope.errorMessage = '';
       LoginService.login($scope.user).then(function () {
+        analytics.setUserId($scope.user.id);
         $window.localStorage.email = $scope.user.email;
         $window.localStorage.password = $scope.user.password;
         $location.path("/");

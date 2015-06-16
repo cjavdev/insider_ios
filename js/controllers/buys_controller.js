@@ -1,6 +1,8 @@
 /*globals angular, window */
  angular.module('insider.controllers')
   .controller('BuysCtrl', function ($cacheFactory, $state, $scope, loc, BuyIdeaService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Buys Controller"); }
+
     var loadRemote = function () {
       $scope.retryWithPromisePullToRefresh(BuyIdeaService.findAll, [], 3, this)
         .then(function (trades) {

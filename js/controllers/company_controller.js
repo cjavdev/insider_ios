@@ -1,6 +1,7 @@
 /*globals angular, window */
 angular.module('insider.controllers')
   .controller('CompanyCtrl', function ($state, $scope, $stateParams, CompanyService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Companies Controller"); }
     $scope.showTrades = true;
 
     $scope.refresh = function () {

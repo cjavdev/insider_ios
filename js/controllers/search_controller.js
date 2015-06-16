@@ -1,6 +1,7 @@
 /*globals angular, window */
 angular.module('insider.controllers')
   .controller('SearchCtrl', function ($state, $scope, SearchService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Search Controller"); }
     $scope.keyword = "";
     $scope.results = [];
     $scope.search = function () {

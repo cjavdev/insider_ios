@@ -1,6 +1,7 @@
 /*globals angular, window */
  angular.module('insider.controllers')
   .controller('Form4sCtrl', function ($cacheFactory, $state, $scope, loc, Form4Service) {
+    if(typeof analytics !== undefined) { analytics.trackView("Form4s Controller"); }
     this.offset = 0;
     var _form4s = [];
     var loadRemote = function (offset) {

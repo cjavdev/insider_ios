@@ -1,6 +1,7 @@
 /*globals angular, window */
 angular.module('insider.controllers')
   .controller('Form4Ctrl', function ($scope, $stateParams, Form4Service) {
+    if(typeof analytics !== undefined) { analytics.trackView("Form4 Controller"); }
     $scope.refresh = function () {
       $scope.retryWithPromise(Form4Service.findById, [$stateParams.id], 3, this)
         .then(function (form4Data) {

@@ -133,6 +133,11 @@ var app = angular.module('insider', [
   .run(function($state, $ionicPlatform, $cordovaPush, $rootScope, $storekit) {
     $ionicPlatform.ready(function() {
       console.log('platform ready');
+
+      if (typeof analytics !== undefined) {
+        analytics.startTrackerWithId("UA-37530006-2");
+      }
+
       $storekit
         .setLogging(true)
         .load(['com.insiderai.ios.1yr'])

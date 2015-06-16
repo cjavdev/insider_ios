@@ -1,5 +1,6 @@
 angular.module('insider.controllers')
   .controller('SubscribeCtrl', function ($state, $scope, $location, SubscribeService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Subscribe Controller"); }
     $scope.user = {};
     $scope.errorMessage = "";
 

@@ -1,6 +1,7 @@
 /*globals angular, window, document */
 angular.module('insider.controllers')
   .controller('TradeCtrl', function ($scope, $stateParams, BuyIdeaService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Trade Controller"); }
     $scope.navigateTo = function (url) {
       window.open(url, '_blank', 'location=yes');
     };

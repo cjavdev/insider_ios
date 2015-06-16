@@ -1,6 +1,7 @@
 /*globals angular, window */
 angular.module('insider.controllers')
   .controller('InsiderCtrl', function ($state, $scope, $stateParams, InsiderService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Insider Controller"); }
     $scope.showTrades = true;
 
     $scope.refresh = function () {

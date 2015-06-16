@@ -1,5 +1,6 @@
 angular.module('insider.controllers')
   .controller('RegisterCtrl', function ($state, $scope, $rootScope, $location, RegisterService) {
+    if(typeof analytics !== undefined) { analytics.trackView("Register Controller"); }
     $scope.user = { device_token: $rootScope.deviceToken };
     $scope.errorMessage = '';
     $scope.doRegister = function () {
